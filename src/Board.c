@@ -1,10 +1,8 @@
 #include <stdlib.h>
 #include "Board.h"
 
-
 static void allocate_state(Board *self);
 static int input(Board *self, char column, char colour);
-
 
 Board *Board_new(void)
 {
@@ -17,7 +15,6 @@ Board *Board_new(void)
     return self;
 }
 
-
 static int input(Board *self, char column, char colour)
 {
     return column * colour;
@@ -27,7 +24,7 @@ static void allocate_state(Board *self)
 {
     self->state = malloc(BOARD_COLUMNS * sizeof(char *));
 
-    int x, y;
+    int x;
 
     for (x = 0; x < BOARD_COLUMNS; x++)
     {
