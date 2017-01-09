@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include "Board.h"
 
-static void allocate_state(Board *self);
 static int input(Board *self, int column, char colour);
+static void allocate_state(Board *self);
 
 Board *Board_new(void)
 {
@@ -27,7 +27,7 @@ static int input(Board *self, int column, char colour)
     int y;
     char current_square;
 
-    for(y = 0; y < BOARD_ROWS; y++) {
+    for (y = 0; y < BOARD_ROWS; y++) {
         current_square = self->state[column][y];
 
         if (current_square != ' ')
