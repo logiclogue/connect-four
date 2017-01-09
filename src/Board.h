@@ -2,7 +2,7 @@
 #define BOARD_H
 #define BOARD_PROPS(self_t) \
     char **state; \
-    int (*input)(self_t *self, char column, char colour);
+    int (*input)(self_t *self, int column, char colour);
 #define BOARD_ROWS 6
 #define BOARD_COLUMNS 7
 
