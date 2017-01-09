@@ -3,6 +3,7 @@
 
 static int input(Board *self, int column, char colour);
 static void allocate_state(Board *self);
+static int is_column_valid(Board *self, int column);
 
 Board *Board_new(void)
 {
@@ -11,16 +12,16 @@ Board *Board_new(void)
     allocate_state(self);
 
     self->input = input;
+    self->is_column_valid = is_column_valid;
 
     return self;
 }
 
 static int input(Board *self, int column, char colour)
 {
-    int is_column_full = self->state[column][BOARD_ROWS] != ' ';
-    int is_valid_column = column >= 0 && column < BOARD_COLUMNS;
+    int is_column_valid = self->is_column_valid(self, column);
 
-    if (is_column_full && is_valid_column) {
+    if (is_column_valid) {
         return 0;
     }
 
@@ -41,6 +42,14 @@ static int input(Board *self, int column, char colour)
     }
 
     return 1;
+}
+
+static int is_column_valid(Board *self, int column)
+{
+    int is_column_not_full = self->state[column][BOARD_ROWS] == ' ';
+    int is_column_in_range = column >= 0 && column < BOARD_COLUMNS;
+
+    return is_column_not_full && is_column_in_range;
 }
 
 static void allocate_state(Board *self)
