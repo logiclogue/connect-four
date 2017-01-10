@@ -20,6 +20,7 @@ Board *Board_new(void)
 static int input(Board *self, int column, char colour)
 {
     int is_column_valid = self->is_column_valid(self, column);
+    char *current_column = self->state[column];
 
     if (is_column_valid) {
         return 0;
@@ -29,14 +30,14 @@ static int input(Board *self, int column, char colour)
     char current_square;
 
     for (y = 0; y < BOARD_ROWS; y++) {
-        current_square = self->state[column][y];
+        current_square = current_column[y];
 
-        if (current_square != ' ')
+        if (current_square != BOARD_EMPTY_TOKEN)
         {
             continue;
         }
 
-        self->state[column][y] = colour;
+        current_column[y] = colour;
 
         break;
     }
@@ -46,7 +47,8 @@ static int input(Board *self, int column, char colour)
 
 static int is_column_valid(Board *self, int column)
 {
-    int is_column_not_full = self->state[column][BOARD_ROWS] == ' ';
+    int current_square = self->state[column][BOARD_ROWS];
+    int is_column_not_full = current_square == BOARD_EMPTY_TOKEN;
     int is_column_in_range = column >= 0 && column < BOARD_COLUMNS;
 
     return is_column_not_full && is_column_in_range;
@@ -62,7 +64,7 @@ static void allocate_state(Board *self)
         self->state[x] = malloc(BOARD_ROWS * sizeof(char));
 
         for (y = 0; y < BOARD_ROWS; y++) {
-            self->state[x][y] = ' ';
+            self->state[x][y] = BOARD_EMPTY_TOKEN;
         }
     }
 }
