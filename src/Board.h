@@ -6,6 +6,7 @@
     int (*is_column_valid)(Board *self, int column);
 #define BOARD_ROWS 6
 #define BOARD_COLUMNS 7
+#define BOARD_SQUARES BOARD_ROWS * BOARD_COLUMNS
 #define BOARD_EMPTY_TOKEN ' '
 
 typedef struct _Board Board;
