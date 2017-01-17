@@ -15,6 +15,7 @@ struct _Game {
     GAME_PROPS(Game)
 };
 
-Game *Game_new(Player *player_1, Player *player_2);
+Game *Game_new(void);
+void Game_destroy(Game *self);
 
 #endif
