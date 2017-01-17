@@ -32,8 +32,7 @@ static int input(Board *self, int column, char colour)
     for (y = 0; y < BOARD_ROWS; y++) {
         current_square = current_column[y];
 
-        if (current_square != BOARD_EMPTY_TOKEN)
-        {
+        if (current_square != BOARD_EMPTY_TOKEN) {
             continue;
         }
 

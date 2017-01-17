@@ -25,8 +25,7 @@ static int input_move(self_t *self, Player *player, int column)
     Board *board = self->board;
     int is_column_valid = board->is_column_valid(board, column);
 
-    if (is_column_valid)
-    {
+    if (is_column_valid) {
         return 0;
     }
 
