@@ -3,7 +3,7 @@
 
 Class *Class_new(void)
 {
-    Class *self = malloc(sizeof(Class));
+    Class *self = CLASS_MALLOC(Class);
 
     Class_apply(self);
 

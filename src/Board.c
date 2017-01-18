@@ -5,7 +5,7 @@ static void allocate_state(Board *self);
 
 Board *Board_new(int columns, int rows)
 {
-    Board *self = malloc(sizeof(Board));
+    Board *self = CLASS_MALLOC(Board);
 
     allocate_state(self);
 

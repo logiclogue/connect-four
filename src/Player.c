@@ -4,7 +4,7 @@
 
 Player *Player_new(void)
 {
-    Player *self = malloc(sizeof(Player));
+    Player *self = CLASS_MALLOC(Player);
 
     Class_apply((Class *)self);
 

@@ -15,4 +15,6 @@ Class *Class_new(void);
 void Class_apply(Class *self);
 void Class_destroy(Class *self);
 
+#define CLASS_MALLOC(self_t) malloc(sizeof(self_t))
+
 #endif

@@ -5,7 +5,7 @@
 
 Game *Game_new(void)
 {
-    Game *self = malloc(sizeof(Game));
+    Game *self = CLASS_MALLOC(Game);
 
     self->board = Board_new(7, 6);
 
