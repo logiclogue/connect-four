@@ -15,5 +15,7 @@ struct _Player {
 };
 
 Player *Player_new(void);
+int Player_input_move(Player *self, int column);
+int Player_move_valid(Player *self, int column);
 
 #endif
