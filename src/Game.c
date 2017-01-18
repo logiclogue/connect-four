@@ -3,8 +3,6 @@
 #include "Player.h"
 #include "Game.h"
 
-static int input_move(Game *self, Player *player, int column);
-
 Game *Game_new(void)
 {
     Game *self = malloc(sizeof(Game));
@@ -18,7 +16,7 @@ Game *Game_new(void)
     self->player_to_move = self->player_1;
     self->record = malloc(board_squares * sizeof(char));
     self->move = 0;
-    self->input_move = input_move;
+    self->input_move = Game_input_move;
 
     return self;
 }
@@ -32,7 +30,7 @@ void Game_destroy(Game *self)
     free(self);
 }
 
-static int input_move(Game *self, Player *player, int column)
+int Game_input_move(Game *self, Player *player, int column)
 {
     Board *board = self->board;
     int is_column_valid = board->is_column_valid(board, column);
