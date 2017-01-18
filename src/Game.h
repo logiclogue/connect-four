@@ -1,5 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
+
+#include "Class.h"
+
 #define GAME_PROPS(self_t) \
     char *record; \
     int move; \
@@ -12,6 +15,7 @@
 typedef struct _Game Game;
 
 struct _Game {
+    CLASS_PROPS(Game)
     GAME_PROPS(Game)
 };
 

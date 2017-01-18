@@ -1,5 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
+
+#include "Class.h"
+
 #define BOARD_PROPS(self_t) \
     char **state; \
     int rows; \
@@ -11,6 +14,7 @@
 typedef struct _Board Board;
 
 struct _Board {
+    CLASS_PROPS(Board)
     BOARD_PROPS(Board)
 };
 
