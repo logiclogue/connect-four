@@ -16,15 +16,24 @@ Game *Game_new(void)
     self->player_to_move = self->player_1;
     self->record = malloc(board_squares * sizeof(char));
     self->move = 0;
-    self->input_move = Game_input_move;
+
+    Game_apply(self);
 
     return self;
 }
 
+void Game_apply(Game *self)
+{
+    self->new = Game_new;
+    self->apply = Game_apply;
+    self->destroy = Game_destroy;
+    self->input_move = Game_input_move;
+}
+
 void Game_destroy(Game *self)
 {
-    //self->player_1->destroy(player_1);
-    //self->player_2->destroy(player_2);
+    self->player_1->destroy(self->player_1);
+    self->player_2->destroy(self->player_2);
 
     free(self->record);
     free(self);

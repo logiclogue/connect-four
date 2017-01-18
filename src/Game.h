@@ -20,6 +20,7 @@ struct _Game {
 };
 
 Game *Game_new(void);
+void Game_apply(Game *self);
 void Game_destroy(Game *self);
 int Game_input_move(Game *self, Player *player, int column);
 
