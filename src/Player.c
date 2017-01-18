@@ -16,7 +16,13 @@ Player *Player_new(void)
 
 int Player_input_move(Player *self, int column)
 {
-    return 0;
+    int move_valid = self->move_valid(self, column);
+
+    if (!move_valid) {
+        return 0;
+    }
+
+    return 1;
 }
 
 int Player_move_valid(Player *self, int column)
