@@ -20,7 +20,6 @@ struct _Board {
 
 Board *Board_new(int columns, int rows);
 int Board_input(Board *self, int column, char colour);
-void Board_allocate_state(Board *self);
 int Board_is_column_valid(Board *self, int column);
 
 #endif
