@@ -19,6 +19,7 @@ struct _Board {
 };
 
 Board *Board_new(int columns, int rows);
+void Board_apply(Board *self);
 int Board_input(Board *self, int column, char colour);
 int Board_is_column_valid(Board *self, int column);
 

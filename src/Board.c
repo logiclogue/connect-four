@@ -11,10 +11,19 @@ Board *Board_new(int columns, int rows)
 
     self->columns = columns;
     self->rows = rows;
-    self->input = Board_input;
-    self->is_column_valid = Board_is_column_valid;
+
+    Board_apply(self);
 
     return self;
+}
+
+void Board_apply(Board *self)
+{
+    self->new = Board_new;
+    self->apply = Board_apply;
+    self->destroy = Board_destroy;
+    self->input = Board_input;
+    self->is_column_valid = Board_is_column_valid;
 }
 
 int Board_input(Board *self, int column, char colour)
