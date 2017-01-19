@@ -17,13 +17,30 @@ Board *Board_new(int columns, int rows)
     return self;
 }
 
+Board *Board_new_default(void)
+{
+    return Board_new(7, 6);
+}
+
 void Board_apply(Board *self)
 {
-    self->new = Board_new;
+    self->new = Board_new_default;
     self->apply = Board_apply;
     self->destroy = Board_destroy;
     self->input = Board_input;
     self->is_column_valid = Board_is_column_valid;
+}
+
+void Board_destroy(Board *self)
+{
+    int x;
+
+    for (x = 0; x < self->columns; x++) {
+        free(self->state[x]);
+    }
+
+    free(self->state);
+    free(self);
 }
 
 int Board_input(Board *self, int column, char colour)
