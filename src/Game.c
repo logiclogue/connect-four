@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Game.h"
 
-Game *Game_new(void)
+Game *Game_new(Player *player_1, Player *player_2)
 {
     Game *self = CLASS_MALLOC(Game);
 
@@ -11,9 +11,9 @@ Game *Game_new(void)
 
     int board_squares = self->board->rows * self->board->columns;
 
-    self->player_1 = Player_new();
-    self->player_2 = Player_new();
-    self->player_to_move = self->player_1;
+    self->player_1 = player_1;
+    self->player_2 = player_2;
+    self->player_to_move = player_1;
     self->record = malloc(board_squares * sizeof(char));
     self->move = 0;
 
@@ -22,9 +22,17 @@ Game *Game_new(void)
     return self;
 }
 
+Game *Game_new_default(void)
+{
+    Player *player_1 = Player_new();
+    Player *player_2 = Player_new();
+
+    return Game_new(player_1, player_2);
+}
+
 void Game_apply(Game *self)
 {
-    self->new = Game_new;
+    self->new = Game_new_default;
     self->apply = Game_apply;
     self->destroy = Game_destroy;
     self->input_move = Game_input_move;

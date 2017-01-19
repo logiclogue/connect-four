@@ -19,7 +19,8 @@ struct _Game {
     GAME_PROPS(Game)
 };
 
-Game *Game_new(void);
+Game *Game_new(Player *player_1, Player *player_2);
+Game *Game_new_default(void);
 void Game_apply(Game *self);
 void Game_destroy(Game *self);
 int Game_input_move(Game *self, Player *player, int column);
