@@ -16,7 +16,7 @@ LineChecker *LineChecker_new(Board *board)
 
 LineChecker *LineChecker_new_default(void)
 {
-    return LineChecker_new(void);
+    return LineChecker_new(NULL);
 }
 
 void LineChecker_apply(LineChecker *self)

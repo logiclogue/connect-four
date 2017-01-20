@@ -10,9 +10,9 @@
 typedef struct _LineChecker LineChecker;
 
 struct _LineChecker {
-    CLASS_PROPS(LineChecker);
-    LINE_CHECKER_PROPS(LineChecker);
-}
+    CLASS_PROPS(LineChecker)
+    LINE_CHECKER_PROPS(LineChecker)
+};
 
 LineChecker *LineChecker_new(Board *board);
 LineChecker *LineChecker_new_default(void);
