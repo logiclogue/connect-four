@@ -1,17 +1,13 @@
 #include <stdlib.h>
+#include "Class.h"
+#include "Grid.h"
 #include "Board.h"
-
-static void allocate_state(Board *self);
 
 Board *Board_new(int columns, int rows)
 {
     Board *self = CLASS_MALLOC(Board);
 
-    allocate_state(self);
-
-    self->columns = columns;
-    self->rows = rows;
-
+    Grid_apply((Grid *)self, columns, rows);
     Board_apply(self);
 
     return self;
@@ -33,20 +29,13 @@ void Board_apply(Board *self)
 
 void Board_destroy(Board *self)
 {
-    int x;
-
-    for (x = 0; x < self->columns; x++) {
-        free(self->state[x]);
-    }
-
-    free(self->state);
-    free(self);
+    Grid_destroy((Grid *)self);
 }
 
-int Board_input(Board *self, int column, char colour)
+int Board_input(Board *self, int column, char piece)
 {
     int is_column_valid = self->is_column_valid(self, column);
-    char *current_column = self->state[column];
+    char *current_column = self->grid[column];
 
     if (is_column_valid) {
         return 0;
@@ -58,11 +47,11 @@ int Board_input(Board *self, int column, char colour)
     for (y = 0; y < self->rows; y++) {
         current_square = current_column[y];
 
-        if (current_square != BOARD_EMPTY_TOKEN) {
+        if (current_square != self->empty_square) {
             continue;
         }
 
-        current_column[y] = colour;
+        current_column[y] = piece;
 
         break;
     }
@@ -72,24 +61,10 @@ int Board_input(Board *self, int column, char colour)
 
 int Board_is_column_valid(Board *self, int column)
 {
-    int current_square = self->state[column][self->rows];
-    int is_column_not_full = current_square == BOARD_EMPTY_TOKEN;
-    int is_column_in_range = column >= 0 && column < self->columns;
+    int last_row = self->rows - 1;
+    int current_square = self->get(self, column, last_row);
+    int is_column_not_full = current_square == self->empty_square;
+    int is_column_in_range = self->is_in_range(self, column, last_row);
 
     return is_column_not_full && is_column_in_range;
-}
-
-static void allocate_state(Board *self)
-{
-    self->state = malloc(self->columns * sizeof(char *));
-
-    int x, y;
-
-    for (x = 0; x < self->columns; x++) {
-        self->state[x] = malloc(self->rows * sizeof(char));
-
-        for (y = 0; y < self->rows; y++) {
-            self->state[x][y] = BOARD_EMPTY_TOKEN;
-        }
-    }
 }

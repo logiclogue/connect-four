@@ -10,7 +10,7 @@
     char empty_square; \
     char (*get)(self_t *self, int column, int row); \
     int (*set)(self_t *self, int column, int row, char piece); \
-    int (*is_in_range)(Grid *self, int column, int row);
+    int (*is_in_range)(self_t *self, int column, int row);
 
 typedef struct _Grid Grid;
 
@@ -21,7 +21,8 @@ struct _Grid {
 
 Grid *Grid_new(int columns, int rows);
 Grid *Grid_new_default(void);
-void Grid_apply(Grid *self);
+void Grid_apply(Grid *self, int columns, int rows);
+void Grid_apply_default(Grid *self);
 void Grid_destroy(Grid *self);
 char Grid_get(Grid *self, int column, int row);
 int Grid_set(Grid *self, int column, int row, char piece);

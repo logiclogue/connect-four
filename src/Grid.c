@@ -9,13 +9,7 @@ Grid *Grid_new(int columns, int rows)
 {
     Grid *self = CLASS_MALLOC(Grid);
 
-    allocate_grid(self);
-
-    self->columns = columns;
-    self->rows = rows;
-    self->empty_square = ' ';
-
-    Grid_apply(self);
+    Grid_apply(self, columns, rows);
 
     return self;
 }
@@ -25,10 +19,21 @@ Grid *Grid_new_default(void)
     return Grid_new(7, 6);
 }
 
-void Grid_apply(Grid *self)
+void Grid_apply(Grid *self, int columns, int rows)
+{
+    allocate_grid(self);
+
+    self->columns = columns;
+    self->rows = rows;
+    self->empty_square = ' ';
+
+    Grid_apply_default(self);
+}
+
+void Grid_apply_default(Grid *self)
 {
     self->new = Grid_new_default;
-    self->apply = Grid_apply;
+    self->apply = Grid_apply_default;
     self->destroy = Grid_destroy;
     self->get = Grid_get;
     self->set = Grid_set;
