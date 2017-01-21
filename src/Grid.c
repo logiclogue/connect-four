@@ -30,6 +30,9 @@ void Grid_apply(Grid *self)
     self->new = Grid_new_default;
     self->apply = Grid_apply;
     self->destroy = Grid_destroy;
+    self->get = Grid_get;
+    self->set = Grid_set;
+    self->is_in_range = Grid_is_in_range;
 }
 
 void Grid_destroy(Grid *self)
@@ -37,6 +40,36 @@ void Grid_destroy(Grid *self)
     destroy_grid(self);
 
     free(self);
+}
+
+char Grid_get(Grid *self, int column, int row)
+{
+    if (self->is_in_range(self, column, row))
+    {
+        return self->grid[column][row];
+    }
+
+    return self->empty_square;
+}
+
+int Grid_set(Grid *self, int column, int row, char piece)
+{
+    if (!self->is_in_range(self, column, row))
+    {
+        return 0;
+    }
+
+    self->grid[column][row] = piece;
+
+    return 1;
+}
+
+int Grid_is_in_range(Grid *self, int column, int row)
+{
+    int is_column_in_range = column >= 0 && column < self->columns;
+    int is_row_in_range = row >= 0 && row < self->rows;
+
+    return is_column_in_range && is_row_in_range;
 }
 
 static void allocate_grid(Grid *self)
