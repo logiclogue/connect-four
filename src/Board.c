@@ -34,26 +34,22 @@ void Board_destroy(Board *self)
 
 int Board_input(Board *self, int column, char piece)
 {
-    int is_column_valid = self->is_column_valid(self, column);
+    int is_not_column_valid = !self->is_column_valid(self, column);
     char *current_column = self->grid[column];
 
-    if (is_column_valid) {
+    if (is_not_column_valid) {
         return 0;
     }
 
-    int y;
+    int row;
     char current_square;
 
-    for (y = 0; y < self->rows; y++) {
-        current_square = current_column[y];
+    for (row = 0; row < self->rows; row++) {
+        current_square = current_column[row];
 
-        if (current_square != self->empty_square) {
-            continue;
+        if (current_square == self->empty_square) {
+            current_column[row] = piece;
         }
-
-        current_column[y] = piece;
-
-        break;
     }
 
     return 1;
