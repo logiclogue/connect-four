@@ -2,11 +2,12 @@
 #include "LineChecker.h"
 #include "Class.h"
 
-LineChecker *LineChecker_new(Board *board)
+LineChecker *LineChecker_new(Board *board, int length)
 {
     LineChecker *self = CLASS_MALLOC(LineChecker);
 
     self->board = board;
+    self->length = length;
 
     Class_apply((Class *)self);
     LineChecker_apply(self);
@@ -16,7 +17,7 @@ LineChecker *LineChecker_new(Board *board)
 
 LineChecker *LineChecker_new_default(void)
 {
-    return LineChecker_new(NULL);
+    return LineChecker_new(NULL, 4);
 }
 
 void LineChecker_apply(LineChecker *self)

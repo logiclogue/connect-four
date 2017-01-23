@@ -5,6 +5,7 @@
 
 #define LINE_CHECKER_PROPS(self_t) \
     Board *board; \
+    int length; \
     int (*is_line)(self_t *self);
 
 typedef struct _LineChecker LineChecker;
