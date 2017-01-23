@@ -81,23 +81,23 @@ static void allocate_grid(Grid *self)
 {
     self->grid = malloc(self->columns * sizeof(char *));
 
-    int x, y;
+    int column, row;
 
-    for (x = 0; x < self->columns; x++) {
-        self->grid[x] = malloc(self->rows * sizeof(char));
+    for (column = 0; column < self->columns; column++) {
+        self->grid[column] = malloc(self->rows * sizeof(char));
 
-        for (y = 0; y < self->rows; y++) {
-            self->grid[x][y] = self->empty_square;
+        for (row = 0; row < self->rows; row++) {
+            self->grid[column][row] = self->empty_square;
         }
     }
 }
 
 static void destroy_grid(Grid *self)
 {
-    int x;
+    int column;
 
-    for (x = 0; x < self->columns; x++) {
-        free(self->grid[x]);
+    for (column = 0; column < self->columns; column++) {
+        free(self->grid[column]);
     }
 
     free(self->grid);
