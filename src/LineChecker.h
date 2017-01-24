@@ -1,10 +1,10 @@
 #ifndef LINE_CHECKER_H
 #define LINE_CHECKER_H
 
-#include "Board.h"
+#include "Grid.h"
 
 #define LINE_CHECKER_PROPS(self_t) \
-    Board *board; \
+    Grid *grid; \
     int length; \
     int (*is_line)(self_t *self);
 
@@ -15,7 +15,7 @@ struct _LineChecker {
     LINE_CHECKER_PROPS(LineChecker)
 };
 
-LineChecker *LineChecker_new(Board *board);
+LineChecker *LineChecker_new(Grid *grid, int length);
 LineChecker *LineChecker_new_default(void);
 void LineChecker_apply(LineChecker *self);
 void LineChecker_destroy(LineChecker *self);

@@ -2,11 +2,11 @@
 #include "LineChecker.h"
 #include "Class.h"
 
-LineChecker *LineChecker_new(Board *board, int length)
+LineChecker *LineChecker_new(Grid *grid, int length)
 {
     LineChecker *self = CLASS_MALLOC(LineChecker);
 
-    self->board = board;
+    self->grid = grid;
     self->length = length;
 
     Class_apply((Class *)self);
@@ -34,5 +34,30 @@ void LineChecker_destroy(LineChecker *self)
 
 int LineChecker_is_line(LineChecker *self)
 {
+    return 0;
+}
+
+static int is_horizontal_line(LineChecker *self)
+{
+    int column, row, i;
+    int max_column = self->columns - self->length;
+    int max_row = self->rows;
+    char piece;
+    char current_piece;
+
+    for (column = 0; column < max_column; column++) {
+        for (row = 0; row < max_row; row++) {
+            piece = self->grid->get(column, row);
+
+            for (i = 0; i < self->length; i++) {
+                current_piece = self->grid->get(column + i, row);
+
+                if (current_piece != piece) {
+                    break;
+                }
+            }
+        }
+    }
+
     return 0;
 }
