@@ -6,7 +6,11 @@
 #define LINE_CHECKER_PROPS(self_t) \
     Grid *grid; \
     int length; \
-    int (*is_line)(self_t *self);
+    int (*is_line)(self_t *self); \
+    int (*is_horizontal_line)(self_t *self); \
+    int (*is_vertical_line)(self_t *self); \
+    int (*is_positive_diagonal_line)(self_t *self); \
+    int (*is_negative_diagonal_line)(self_t *self); \
 
 typedef struct _LineChecker LineChecker;
 
