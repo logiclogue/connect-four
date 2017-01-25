@@ -20,5 +20,9 @@ LineChecker *LineChecker_new_default(void);
 void LineChecker_apply(LineChecker *self);
 void LineChecker_destroy(LineChecker *self);
 int LineChecker_is_line(LineChecker *self);
+int LineChecker_is_horizontal_line(LineChecker *self);
+int LineChecker_is_vertical_line(LineChecker *self);
+int LineChecker_is_positive_diagonal_line(LineChecker *self);
+int LineChecker_is_negative_diagonal_line(LineChecker *self);
 
 #endif
