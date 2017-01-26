@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Board.h"
 
+#ifdef BUILD_MAIN
 int main(void)
 {
     Board *board = Board_new(7, 6);
@@ -9,3 +10,4 @@ int main(void)
 
     return 0;
 }
+#endif
