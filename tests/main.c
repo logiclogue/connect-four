@@ -1,10 +1,10 @@
-#include <stdio.h>
-#include "../deps/MinUnit/minunit.h"
-
 #ifdef BUILD_TESTS
+#include <stdio.h>
+#include "Grid_tests.h"
+
 int main(void)
 {
-    printf("Testing!\n");
+    Grid_tests();
 
     return 0;
 }

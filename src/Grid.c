@@ -64,6 +64,7 @@ int Grid_set(Grid *self, int column, int row, char piece)
         return 0;
     }
 
+    printf("\n\nhere\n\n");
     self->grid[column][row] = piece;
 
     return 1;
