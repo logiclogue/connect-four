@@ -20,7 +20,7 @@ $(EXECUTABLES): $(OBJECTS)
 	$(CC) $(BUILDFLAGS) $(CFLAGS) $< -o $@
 
 install:
-	clib install jeradesign/minunit
+	clib install jlcordeiro/minunit
 
 tests: BUILDFLAGS=-DBUILD_TESTS
 tests: $(SOURCES) $(DIRBUILD)/tests
