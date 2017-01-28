@@ -49,6 +49,8 @@ int Board_input(Board *self, int column, char piece)
 
         if (current_square == self->empty_square) {
             current_column[row] = piece;
+
+            break;
         }
     }
 
