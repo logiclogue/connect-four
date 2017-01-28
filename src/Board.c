@@ -44,7 +44,7 @@ int Board_input(Board *self, int column, char piece)
     int row;
     char current_square;
 
-    for (row = 0; row < self->rows; row++) {
+    for (row = 0; row < self->rows; row += 1) {
         current_square = current_column[row];
 
         if (current_square == self->empty_square) {

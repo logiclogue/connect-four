@@ -21,12 +21,11 @@ Grid *Grid_new_default(void)
 
 void Grid_apply(Grid *self, int columns, int rows)
 {
-    allocate_grid(self);
-
     self->columns = columns;
     self->rows = rows;
     self->empty_square = ' ';
 
+    allocate_grid(self);
     Grid_apply_default(self);
 }
 
@@ -64,7 +63,6 @@ int Grid_set(Grid *self, int column, int row, char piece)
         return 0;
     }
 
-    printf("\n\nhere\n\n");
     self->grid[column][row] = piece;
 
     return 1;
@@ -84,10 +82,10 @@ static void allocate_grid(Grid *self)
 
     int column, row;
 
-    for (column = 0; column < self->columns; column++) {
+    for (column = 0; column < self->columns; column += 1) {
         self->grid[column] = malloc(self->rows * sizeof(char));
 
-        for (row = 0; row < self->rows; row++) {
+        for (row = 0; row < self->rows; row += 1) {
             self->grid[column][row] = self->empty_square;
         }
     }
@@ -97,7 +95,7 @@ static void destroy_grid(Grid *self)
 {
     int column;
 
-    for (column = 0; column < self->columns; column++) {
+    for (column = 0; column < self->columns; column += 1) {
         free(self->grid[column]);
     }
 
