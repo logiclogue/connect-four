@@ -78,8 +78,8 @@ static int check_line(LineChecker *self, int delta_column, int delta_row)
     int min_row = get_minimum(self, delta_row);
     char piece, current_piece;
 
-    for (column = min_column; column < max_column; column += 1) {
-        for (row = min_row; row < max_row; row += 1) {
+    for (column = min_column; column <= max_column; column += 1) {
+        for (row = min_row; row <= max_row; row += 1) {
             piece = self->grid->get(self->grid, column, row);
 
             for (i = 0; i < self->length; i += 1) {
