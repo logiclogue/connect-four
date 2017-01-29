@@ -71,30 +71,34 @@ int LineChecker_is_negative_diagonal_line(LineChecker *self)
 
 static int check_line(LineChecker *self, int delta_column, int delta_row)
 {
-    int column, row, i, is_same_piece, testing_column, testing_row;
+    int column, row, i,
+        is_same_piece, is_empty_square,
+        testing_column, testing_row;
     int max_column = get_maximum(self, self->grid->columns, delta_column);
     int max_row = get_maximum(self, self->grid->rows, delta_row);
     int min_column = get_minimum(self, delta_column);
     int min_row = get_minimum(self, delta_row);
-    char piece, current_piece;
+    char start_piece, current_piece;
 
     for (column = min_column; column <= max_column; column += 1) {
         for (row = min_row; row <= max_row; row += 1) {
-            piece = self->grid->get(self->grid, column, row);
+            start_piece = self->grid->get(self->grid, column, row);
 
             for (i = 0; i < self->length; i += 1) {
                 testing_column = column + (delta_column * i);
                 testing_row = column + (delta_row * i);
-                current_piece = self->grid->get(
-                    self->grid, testing_column, testing_row);
-                is_same_piece = current_piece != piece;
+                current_piece = self->grid->
+                    get(self->grid, testing_column, testing_row);
+                is_same_piece = current_piece == start_piece;
+                is_empty_square = current_piece == self->grid->empty_square;
 
-                if (!is_same_piece) {
+
+                if (!is_same_piece || is_empty_square) {
                     break;
                 }
             }
 
-            if (is_same_piece) {
+            if (is_same_piece && !is_empty_square) {
                 return 1;
             }
         }
@@ -106,7 +110,7 @@ static int check_line(LineChecker *self, int delta_column, int delta_row)
 static int get_maximum(LineChecker *self, int count, int delta)
 {
     if (delta <= 0) {
-        return count;
+        return count - 1;
     }
 
     return count - (delta * self->length);
