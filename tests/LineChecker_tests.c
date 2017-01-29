@@ -81,6 +81,19 @@ Grid *get_horizontal_line_grid(void)
     return (Grid *)board;
 }
 
+Grid *get_vertical_line_grid(void)
+{
+    Board *board = Board_new(3, 3);
+    char piece = 'T';
+    int column = 1;
+
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+
+    return (Grid *)board;
+}
+
 MU_TEST(calls_is_horizontal_line_when_is_line_then_return_true)
 {
     // arrange
@@ -95,6 +108,33 @@ MU_TEST(calls_is_horizontal_line_when_is_line_then_return_true)
     mu_check(return_value);
 }
 
+MU_TEST(calls_is_horizontal_line_when_vertical_then_return_false)
+{
+    // arrange
+    Grid *grid = get_vertical_line_grid();
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_horizontal_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
+MU_TEST(calls_is_horizontal_line_when_empty_grid_returns_false)
+{
+    // arrange
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_horizontal_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void LineChecker_tests()
 {
     printf("LineChecker_tests");
@@ -105,6 +145,8 @@ void LineChecker_tests()
     MU_RUN_TEST(calls_is_line_returns_true_when_one_return_true);
     MU_RUN_TEST(calls_is_line_returns_false_when_none_return_true);
     MU_RUN_TEST(calls_is_horizontal_line_when_is_line_then_return_true);
+    MU_RUN_TEST(calls_is_horizontal_line_when_vertical_then_return_false);
+    MU_RUN_TEST(calls_is_horizontal_line_when_empty_grid_returns_false);
 
     MU_REPORT();
 }
