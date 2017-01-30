@@ -94,6 +94,38 @@ Grid *get_vertical_line_grid(void)
     return (Grid *)board;
 }
 
+Grid *get_positive_diagonal_line_grid(void)
+{
+    Board *board = Board_new(3, 3);
+    char piece = 'T';
+    char other_piece = 'L';
+
+    board->input(board, 0, piece);
+    board->input(board, 1, other_piece);
+    board->input(board, 2, other_piece);
+    board->input(board, 1, piece);
+    board->input(board, 2, other_piece);
+    board->input(board, 2, piece);
+
+    return (Grid *)board;
+}
+
+Grid *get_negative_diagonal_line_grid(void)
+{
+    Board *board = Board_new(3, 3);
+    char piece = 'T';
+    char other_piece = 'L';
+
+    board->input(board, 0, other_piece);
+    board->input(board, 0, other_piece);
+    board->input(board, 0, piece);
+    board->input(board, 1, other_piece);
+    board->input(board, 1, piece);
+    board->input(board, 2, piece);
+
+    return (Grid *)board;
+}
+
 MU_TEST(calls_is_horizontal_line_when_is_line_then_return_true)
 {
     // arrange
@@ -135,6 +167,34 @@ MU_TEST(calls_is_horizontal_line_when_empty_grid_returns_false)
     mu_check(!return_value);
 }
 
+MU_TEST(calls_is_vertical_line_when_is_line_returns_true)
+{
+    // arrange
+    Grid *grid = get_vertical_line_grid();
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_vertical_line(line_checker);
+
+    // assert
+    mu_check(return_value);
+}
+
+MU_TEST(calls_is_vertical_line_when_horizontal_line_returns_false)
+{
+    // arrange
+    Grid *grid = get_horizontal_line_grid();
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_vertical_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void LineChecker_tests()
 {
     printf("LineChecker_tests");
@@ -147,6 +207,7 @@ void LineChecker_tests()
     MU_RUN_TEST(calls_is_horizontal_line_when_is_line_then_return_true);
     MU_RUN_TEST(calls_is_horizontal_line_when_vertical_then_return_false);
     MU_RUN_TEST(calls_is_horizontal_line_when_empty_grid_returns_false);
+    MU_RUN_TEST(calls_is_vertical_line_when_is_line_returns_true);
 
     MU_REPORT();
 }
