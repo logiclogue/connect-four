@@ -86,12 +86,11 @@ static int check_line(LineChecker *self, int delta_column, int delta_row)
 
             for (i = 0; i < self->length; i += 1) {
                 testing_column = column + (delta_column * i);
-                testing_row = column + (delta_row * i);
+                testing_row = row + (delta_row * i);
                 current_piece = self->grid->
                     get(self->grid, testing_column, testing_row);
                 is_same_piece = current_piece == start_piece;
                 is_empty_square = current_piece == self->grid->empty_square;
-
 
                 if (!is_same_piece || is_empty_square) {
                     break;
