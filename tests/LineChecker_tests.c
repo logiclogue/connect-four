@@ -195,6 +195,19 @@ MU_TEST(calls_is_vertical_line_when_horizontal_line_returns_false)
     mu_check(!return_value);
 }
 
+MU_TEST(calls_is_vertical_line_when_empty_grid_returns_false)
+{
+    // arrange
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_vertical_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void LineChecker_tests()
 {
     printf("LineChecker_tests");
@@ -208,6 +221,8 @@ void LineChecker_tests()
     MU_RUN_TEST(calls_is_horizontal_line_when_vertical_then_return_false);
     MU_RUN_TEST(calls_is_horizontal_line_when_empty_grid_returns_false);
     MU_RUN_TEST(calls_is_vertical_line_when_is_line_returns_true);
+    MU_RUN_TEST(calls_is_vertical_line_when_horizontal_line_returns_false);
+    MU_RUN_TEST(calls_is_vertical_line_when_empty_grid_returns_false);
 
     MU_REPORT();
 }
