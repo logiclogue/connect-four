@@ -263,6 +263,33 @@ MU_TEST(calls_is_negative_line_when_is_line_then_returns_true)
     mu_check(return_value);
 }
 
+MU_TEST(calls_is_negative_line_when_is_positive_then_returns_false)
+{
+    // arrange
+    Grid *grid = get_positive_diagonal_line_grid();
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_negative_diagonal_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
+MU_TEST(calls_is_negative_line_when_empty_grid_returns_false)
+{
+    // arrange
+    LineChecker *line_checker = LineChecker_new(grid, 3);
+    int return_value;
+
+    // act
+    return_value = line_checker->is_negative_diagonal_line(line_checker);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void LineChecker_tests()
 {
     printf("LineChecker_tests");
@@ -282,6 +309,8 @@ void LineChecker_tests()
     MU_RUN_TEST(calls_is_positive_diagonal_when_neg_diagonal_returns_false);
     MU_RUN_TEST(calls_is_positive_diagonal_when_empty_grid_returns_false);
     MU_RUN_TEST(calls_is_negative_line_when_is_line_then_returns_true);
+    MU_RUN_TEST(calls_is_negative_line_when_is_positive_then_returns_false);
+    MU_RUN_TEST(calls_is_negative_line_when_empty_grid_returns_false);
 
     MU_REPORT();
 }
