@@ -121,5 +121,5 @@ static int get_minimum(LineChecker *self, int delta)
         return 0;
     }
 
-    return (-delta * self->length);
+    return (-delta * self->length) - 1;
 }
