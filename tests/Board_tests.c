@@ -125,6 +125,114 @@ MU_TEST(calls_input_puts_into_grid)
     mu_check(board->get(board, 1, 0) == piece);
 }
 
+MU_TEST(calls_remove_removes_from_full_grid)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    char piece = 'T';
+    int column = 1;
+    
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+
+    // act
+    board->remove(board, column);
+
+    // assert
+    mu_check(board->get(board, column, 3) == board->empty_square);
+    mu_check(board->get(board, column, 2) == piece);
+}
+
+MU_TEST(calls_remove_when_full_grid_returns_true)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    char piece = 'T';
+    int column = 1;
+    int return_value;
+    
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+
+    // act
+    return_value = board->remove(board, column);
+
+    // assert
+    mu_check(return_value);
+}
+
+MU_TEST(calls_remove_when_one_piece_removes_only_piece)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    char piece = 'T';
+    int column = 1;
+    
+    board->input(board, column, piece);
+
+    // act
+    board->remove(board, column);
+
+    // assert
+    mu_check(board->get(board, column, 0) == board->empty_square);
+}
+
+MU_TEST(calls_remove_when_one_piece_returns_false)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    char piece = 'T';
+    int column = 1;
+    int return_value;
+    
+    board->input(board, column, piece);
+
+    // act
+    return_value = board->remove(board, column);
+
+    // assert
+    mu_check(return_value);
+}
+
+MU_TEST(calls_remove_when_empty_column_returns_false)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    int column = 1;
+    int return_value;
+
+    // act
+    return_value = board->remove(board, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
+char get_returning_empty_square(Board *self, int column, int row)
+{
+    return self->empty_square;
+}
+
+MU_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    int column = 1;
+    int return_value;
+
+    board->get = get_returning_empty_square;
+    
+    // act
+    return_value = board->remove(board, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void Board_tests()
 {
     printf("Board_tests");
@@ -136,6 +244,12 @@ void Board_tests()
     MU_RUN_TEST(calls_input_when_is_column_valid_returns_false_returns_false);
     MU_RUN_TEST(calls_input_when_is_column_valid_returns_true_returns_true);
     MU_RUN_TEST(calls_input_puts_into_grid);
+    MU_RUN_TEST(calls_remove_removes_from_full_grid);
+    MU_RUN_TEST(calls_remove_when_full_grid_returns_true);
+    MU_RUN_TEST(calls_remove_when_one_piece_removes_only_piece);
+    MU_RUN_TEST(calls_remove_when_one_piece_returns_false);
+    MU_RUN_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false);
+    MU_RUN_TEST(calls_remove_when_empty_column_returns_false);
 
     MU_REPORT();
 }
