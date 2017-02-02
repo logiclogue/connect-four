@@ -60,7 +60,27 @@ int Board_input(Board *self, int column, char piece)
 
 char Board_remove(Board *self, int column)
 {
-    return 0;
+    char current_piece = self->get(self, column, 0);
+    int is_empty_square = current_piece == self->empty_square;
+    int row;
+    int max_row = self->rows - 1;
+
+    if (is_empty_square) {
+        return 0;
+    }
+
+    for (row = max_row; row >= 0; row -= 1) {
+        current_piece = self->get(self, column, row);
+        is_empty_square = current_piece == self->empty_square;
+
+        if (!is_empty_square) {
+            break;
+        }
+    }
+
+    self->set(self, column, row, self->empty_square);
+
+    return current_piece;
 }
 
 int Board_is_column_valid(Board *self, int column)
