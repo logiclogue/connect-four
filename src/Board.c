@@ -24,6 +24,7 @@ void Board_apply(Board *self)
     self->apply = Board_apply;
     self->destroy = Board_destroy;
     self->input = Board_input;
+    self->remove = Board_remove;
     self->is_column_valid = Board_is_column_valid;
 }
 
@@ -55,6 +56,11 @@ int Board_input(Board *self, int column, char piece)
     }
 
     return 1;
+}
+
+char Board_remove(Board *self, int column)
+{
+    return 0;
 }
 
 int Board_is_column_valid(Board *self, int column)

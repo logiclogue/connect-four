@@ -125,6 +125,26 @@ MU_TEST(calls_input_puts_into_grid)
     mu_check(board->get(board, 1, 0) == piece);
 }
 
+MU_TEST(calls_remove_returns_character_of_piece)
+{
+    // arrange
+    Board *board = Board_new(4, 4);
+    char piece = 'T';
+    int column = 1;
+    char return_value;
+    
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+    board->input(board, column, piece);
+
+    // act
+    return_value = board->remove(board, column);
+
+    // assert
+    mu_check(return_value == piece);
+}
+
 MU_TEST(calls_remove_removes_from_full_grid)
 {
     // arrange
@@ -151,7 +171,7 @@ MU_TEST(calls_remove_when_full_grid_returns_true)
     Board *board = Board_new(4, 4);
     char piece = 'T';
     int column = 1;
-    int return_value;
+    char return_value;
     
     board->input(board, column, piece);
     board->input(board, column, piece);
@@ -187,7 +207,7 @@ MU_TEST(calls_remove_when_one_piece_returns_false)
     Board *board = Board_new(4, 4);
     char piece = 'T';
     int column = 1;
-    int return_value;
+    char return_value;
     
     board->input(board, column, piece);
 
@@ -203,7 +223,7 @@ MU_TEST(calls_remove_when_empty_column_returns_false)
     // arrange
     Board *board = Board_new(4, 4);
     int column = 1;
-    int return_value;
+    char return_value;
 
     // act
     return_value = board->remove(board, column);
@@ -222,7 +242,7 @@ MU_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false)
     // arrange
     Board *board = Board_new(4, 4);
     int column = 1;
-    int return_value;
+    char return_value;
 
     board->get = get_returning_empty_square;
     
@@ -250,6 +270,7 @@ void Board_tests()
     MU_RUN_TEST(calls_remove_when_one_piece_returns_false);
     MU_RUN_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false);
     MU_RUN_TEST(calls_remove_when_empty_column_returns_false);
+    MU_RUN_TEST(calls_remove_returns_character_of_piece);
 
     MU_REPORT();
 }
