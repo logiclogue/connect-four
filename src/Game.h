@@ -3,6 +3,9 @@
 
 #include "Class.h"
 
+typedef struct _Player Player;
+typedef struct _Board Board;
+
 #define GAME_PROPS(self_t) \
     char *record; \
     int move; \
