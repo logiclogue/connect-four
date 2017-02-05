@@ -51,8 +51,9 @@ int Game_input_move(Game *self, Player *player, int column)
 {
     Board *board = self->board;
     int column_isnt_valid = !board->is_column_valid(board, column);
+    int isnt_players_move = player != self->player_to_move;
 
-    if (column_isnt_valid) {
+    if (column_isnt_valid || isnt_players_move) {
         return 0;
     }
 
