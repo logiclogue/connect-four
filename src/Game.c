@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "Game.h"
 
+static void switch_player_to_move(Game *self);
+
 Game *Game_new(Player *player_1, Player *player_2)
 {
     Game *self = CLASS_MALLOC(Game);
@@ -57,5 +59,16 @@ int Game_input_move(Game *self, Player *player, int column)
         return 0;
     }
 
+    switch_player_to_move(self);
+
     return 1;
+}
+
+static void switch_player_to_move(Game *self)
+{
+    if (self->player_to_move == self->player_1) {
+        self->player_to_move = self->player_2;
+    } else {
+        self->player_to_move = self->player_1;
+    }
 }
