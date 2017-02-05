@@ -50,9 +50,9 @@ void Game_destroy(Game *self)
 int Game_input_move(Game *self, Player *player, int column)
 {
     Board *board = self->board;
-    int is_column_valid = board->is_column_valid(board, column);
+    int column_isnt_valid = !board->is_column_valid(board, column);
 
-    if (is_column_valid) {
+    if (column_isnt_valid) {
         return 0;
     }
 
