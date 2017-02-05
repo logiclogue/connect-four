@@ -23,7 +23,7 @@ MU_TEST(created_with_new_sets_player_properties)
     Game *game;
 
     // act
-    game = Game_new(player_1, player_2);
+    game = Game_new(player_1, player_2, NULL, NULL);
 
     // assert
     mu_check(game->player_1 == player_1);
@@ -96,7 +96,7 @@ void Game_tests()
 
     player_1 = Player_new();
     player_2 = Player_new();
-    game = Game_new(player_1, player_2);
+    game = Game_new(player_1, player_2, NULL, NULL);
 
     MU_RUN_TEST(created_with_new_sets_player_properties);
     MU_RUN_TEST(created_with_new_default_player_properties_arent_null);

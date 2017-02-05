@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Board.h"
 #include "Class.h"
+#include "LineChecker.h"
 
 #define GAME_PROPS(self_t) \
     char *record; \
@@ -12,6 +13,7 @@
     Player *player_2; \
     Player *player_to_move; \
     Board *board; \
+    LineChecker *line_checker; \
     int (*input_move)(self_t *self, Player *player, int column);
 
 typedef struct _Game Game;
@@ -21,7 +23,11 @@ struct _Game {
     GAME_PROPS(Game)
 };
 
-Game *Game_new(Player *player_1, Player *player_2);
+Game *Game_new(
+    Player *player_1,
+    Player *player_2,
+    Board *board,
+    LineChecker *line_checker);
 Game *Game_new_default(void);
 void Game_apply(Game *self);
 void Game_destroy(Game *self);
