@@ -2,7 +2,7 @@
 #include "LineChecker.h"
 #include "Class.h"
 
-static int check_line(LineChecker *self, int delta_column, int delta_row);
+static char check_line(LineChecker *self, int delta_column, int delta_row);
 static int get_maximum(LineChecker *self, int count, int delta);
 static int get_minimum(LineChecker *self, int delta);
 
@@ -51,25 +51,25 @@ int LineChecker_is_line(LineChecker *self)
 
 int LineChecker_is_horizontal_line(LineChecker *self)
 {
-    return check_line(self, 1, 0);
+    return check_line(self, 1, 0) != 0;
 }
 
 int LineChecker_is_vertical_line(LineChecker *self)
 {
-    return check_line(self, 0, 1);
+    return check_line(self, 0, 1) != 0;
 }
 
 int LineChecker_is_positive_diagonal_line(LineChecker *self)
 {
-    return check_line(self, 1, 1);
+    return check_line(self, 1, 1) != 0;
 }
 
 int LineChecker_is_negative_diagonal_line(LineChecker *self)
 {
-    return check_line(self, 1, -1);
+    return check_line(self, 1, -1) != 0;
 }
 
-static int check_line(LineChecker *self, int delta_column, int delta_row)
+static char check_line(LineChecker *self, int delta_column, int delta_row)
 {
     int column, row, i,
         is_same_piece, is_empty_square,
@@ -98,7 +98,7 @@ static int check_line(LineChecker *self, int delta_column, int delta_row)
             }
 
             if (is_same_piece && !is_empty_square) {
-                return 1;
+                return current_piece;
             }
         }
     }
