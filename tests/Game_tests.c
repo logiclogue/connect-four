@@ -7,6 +7,16 @@ Player *player_1;
 Player *player_2;
 Game *game;
 
+static int board_is_column_valid_returning_false(Board *self, int column)
+{
+    return 0;
+}
+
+static int board_is_column_valid_returning_true(Board *self, int column)
+{
+    return 1;
+}
+
 MU_TEST(created_with_new_sets_player_properties)
 {
     // arrange
@@ -40,16 +50,13 @@ MU_TEST(calls_input_move_with_player_not_to_move_returns_false)
     int column = 0;
     int return_value;
 
+    game->board->is_column_valid = board_is_column_valid_returning_true;
+
     // act
     return_value = game->input_move(game, player_2, column);
 
     // assert
     mu_check(!return_value);
-}
-
-int board_is_column_valid_returning_false(Board *self, int column)
-{
-    return 0;
 }
 
 MU_TEST(input_move_when_is_column_valid_returns_false_returns_false)
@@ -78,6 +85,7 @@ void Game_tests()
 
     MU_RUN_TEST(created_with_new_sets_player_properties);
     MU_RUN_TEST(created_with_new_default_player_properties_arent_null);
+    MU_RUN_TEST(calls_input_move_with_player_not_to_move_returns_false);
     MU_RUN_TEST(input_move_when_is_column_valid_returns_false_returns_false);
 
     MU_REPORT();
