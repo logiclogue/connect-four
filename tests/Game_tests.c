@@ -30,7 +30,7 @@ MU_TEST(created_with_new_sets_player_properties)
     mu_check(game->player_2 == player_2);
 }
 
-MU_TEST(created_with_new_default_player_properties_arent_null)
+MU_TEST(created_with_new_default_properties_arent_null)
 {
     // arrange
     Game *game;
@@ -41,6 +41,8 @@ MU_TEST(created_with_new_default_player_properties_arent_null)
     // assert
     mu_check(game->player_1 != NULL);
     mu_check(game->player_2 != NULL);
+    mu_check(game->board != NULL);
+    mu_check(game->line_checker != NULL);
 }
 
 MU_TEST(calls_input_move_with_player_not_to_move_returns_false)
@@ -99,7 +101,7 @@ void Game_tests()
     game = Game_new(player_1, player_2, NULL, NULL);
 
     MU_RUN_TEST(created_with_new_sets_player_properties);
-    MU_RUN_TEST(created_with_new_default_player_properties_arent_null);
+    MU_RUN_TEST(created_with_new_default_properties_arent_null);
     MU_RUN_TEST(calls_input_move_with_player_not_to_move_returns_false);
     MU_RUN_TEST(input_move_when_is_column_valid_returns_false_returns_false);
     MU_RUN_TEST(input_move_valid_move_switches_player);

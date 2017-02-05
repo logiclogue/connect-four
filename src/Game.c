@@ -34,7 +34,7 @@ Game *Game_new(
     }
 
     if (line_checker == NULL) {
-        self->line_checker = LineChecker_new_default();
+        self->line_checker = LineChecker_new((Grid *)self->board, 4);
     } else {
         self->line_checker = line_checker;
     }
