@@ -75,6 +75,21 @@ MU_TEST(input_move_when_is_column_valid_returns_false_returns_false)
     mu_check(!return_value);
 }
 
+MU_TEST(input_move_valid_move_switches_player)
+{
+    // arrange
+    game->player_to_move = player_1;
+    int column = 0;
+
+    game->board->is_column_valid = board_is_column_valid_returning_true;
+
+    // act
+    game->input_move(game, player_1, column);
+
+    // assert
+    mu_check(game->player_to_move == game->player_2);
+}
+
 void Game_tests()
 {
     printf("Game_tests");
@@ -87,6 +102,7 @@ void Game_tests()
     MU_RUN_TEST(created_with_new_default_player_properties_arent_null);
     MU_RUN_TEST(calls_input_move_with_player_not_to_move_returns_false);
     MU_RUN_TEST(input_move_when_is_column_valid_returns_false_returns_false);
+    MU_RUN_TEST(input_move_valid_move_switches_player);
 
     MU_REPORT();
 }
