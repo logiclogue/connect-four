@@ -25,5 +25,6 @@ void Board_destroy(Board *self);
 int Board_input(Board *self, int column, char piece);
 char Board_remove(Board *self, int column);
 int Board_is_column_valid(Board *self, int column);
+int Board_is_full(Board *self);
 
 #endif

@@ -100,8 +100,8 @@ static void switch_player_to_move(Game *self)
 
 int Game_is_game_over(Game *self)
 {
-    int is_line = self->line_checker->is_line(self->line_checker);
-    int are_all_columns_full; /// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    int is_win = self->line_checker->is_line(self->line_checker);
+    int is_draw = self->board->is_full(self->board);
 
-    return is_line || are_all_columns_full;
+    return is_win || is_draw;
 }

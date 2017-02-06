@@ -26,6 +26,7 @@ void Board_apply(Board *self)
     self->input = Board_input;
     self->remove = Board_remove;
     self->is_column_valid = Board_is_column_valid;
+    self->is_full = Board_is_full;
 }
 
 void Board_destroy(Board *self)
@@ -91,4 +92,9 @@ int Board_is_column_valid(Board *self, int column)
     int is_column_in_range = self->is_in_range(self, column, last_row);
 
     return is_column_not_full && is_column_in_range;
+}
+
+int Board_is_full(Board *self)
+{
+    return 0;
 }
