@@ -92,6 +92,27 @@ MU_TEST(input_move_valid_move_switches_player)
     mu_check(game->player_to_move == game->player_2);
 }
 
+static int game_is_game_over_returning_false(Game *self)
+{
+    return 0;
+}
+
+MU_TEST(input_move_when_is_game_over_returns_false_returns_false)
+{
+    // arrange
+    game->player_to_move = player_1;
+    int column = 0;
+    int return_value;
+
+    game->is_game_over = game_is_game_over_returning_false;
+
+    // act
+    return_value = game->input_move(game, player_1, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void Game_tests()
 {
     printf("Game_tests");
@@ -105,6 +126,7 @@ void Game_tests()
     MU_RUN_TEST(calls_input_move_with_player_not_to_move_returns_false);
     MU_RUN_TEST(input_move_when_is_column_valid_returns_false_returns_false);
     MU_RUN_TEST(input_move_valid_move_switches_player);
+    MU_RUN_TEST(input_move_when_is_game_over_returns_false_returns_false);
 
     MU_REPORT();
 }
