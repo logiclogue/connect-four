@@ -7,7 +7,8 @@
 #define BOARD_PROPS(self_t) \
     int (*input)(self_t *self, int column, char piece); \
     char (*remove)(Board *self, int column); \
-    int (*is_column_valid)(self_t *self, int column);
+    int (*is_column_valid)(self_t *self, int column); \
+    int (*is_full)(self_t *self);
 
 typedef struct _Board Board;
 
