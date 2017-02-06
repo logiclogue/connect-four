@@ -105,6 +105,7 @@ MU_TEST(input_move_when_is_game_over_returns_false_returns_false)
     int return_value;
 
     game->is_game_over = game_is_game_over_returning_false;
+    game->board->is_column_valid = board_is_column_valid_returning_false;
 
     // act
     return_value = game->input_move(game, player_1, column);

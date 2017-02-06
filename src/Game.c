@@ -61,6 +61,7 @@ void Game_apply(Game *self)
     self->apply = Game_apply;
     self->destroy = Game_destroy;
     self->input_move = Game_input_move;
+    self->is_game_over = Game_is_game_over;
 }
 
 void Game_destroy(Game *self)
@@ -77,8 +78,9 @@ int Game_input_move(Game *self, Player *player, int column)
     Board *board = self->board;
     int column_isnt_valid = !board->is_column_valid(board, column);
     int isnt_players_move = player != self->player_to_move;
+    int is_game_over = self->is_game_over(self);
 
-    if (column_isnt_valid || isnt_players_move) {
+    if (column_isnt_valid || isnt_players_move || is_game_over) {
         return 0;
     }
 
@@ -94,4 +96,9 @@ static void switch_player_to_move(Game *self)
     } else {
         self->player_to_move = self->player_1;
     }
+}
+
+int Game_is_game_over(Game *self)
+{
+    return 0;
 }
