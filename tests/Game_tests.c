@@ -138,7 +138,9 @@ static int board_is_full_returning_false(Board *self)
 MU_TEST(is_game_over_when_is_line_returns_true_returns_true)
 {
     // arrange
+    Game *game = Game_new_default();
     int return_value;
+
     game->line_checker->is_line = line_checker_is_line_returning_true;
     game->board->is_full = board_is_full_returning_false;
 
@@ -152,7 +154,9 @@ MU_TEST(is_game_over_when_is_line_returns_true_returns_true)
 MU_TEST(is_game_over_when_board_is_full_returns_true_returns_true)
 {
     // arrange
+    Game *game = Game_new_default();
     int return_value;
+
     game->line_checker->is_line = line_checker_is_line_returning_false;
     game->board->is_full = board_is_full_returning_true;
 
@@ -166,7 +170,9 @@ MU_TEST(is_game_over_when_board_is_full_returns_true_returns_true)
 MU_TEST(is_game_over_when_both_are_false_returns_false)
 {
     // arrange
+    Game *game = Game_new_default();
     int return_value;
+
     game->line_checker->is_line = line_checker_is_line_returning_false;
     game->board->is_full = board_is_full_returning_false;
 
@@ -174,7 +180,7 @@ MU_TEST(is_game_over_when_both_are_false_returns_false)
     return_value = game->is_game_over(game);
 
     // assert
-    mu_check(return_value);
+    mu_check(!return_value);
 }
 
 void Game_tests()
