@@ -253,6 +253,45 @@ MU_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false)
     mu_check(!return_value);
 }
 
+static Board *get_full_board(void)
+{
+    Board *board = Board_new(2, 2);
+    char piece = 'T';
+
+    board->input(board, 0, piece);
+    board->input(board, 0, piece);
+    board->input(board, 1, piece);
+    board->input(board, 1, piece);
+
+    return board;
+}
+
+MU_TEST(is_full_when_full_board_returns_true)
+{
+    // arrange
+    Board *board = get_full_board();
+    int return_value;
+
+    // act
+    return_value = board->is_full(board);
+
+    // assert
+    mu_check(return_value);
+}
+
+MU_TEST(is_full_when_empty_board_returns_false)
+{
+    // arrange
+    Board *board = Board_new(20, 20);
+    int return_value;
+
+    // act
+    return_value = board->is_full(board);
+
+    // assert
+    mu_check(!return_value);
+}
+
 void Board_tests()
 {
     printf("Board_tests");
@@ -271,6 +310,8 @@ void Board_tests()
     MU_RUN_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false);
     MU_RUN_TEST(calls_remove_when_empty_column_returns_false);
     MU_RUN_TEST(calls_remove_returns_character_of_piece);
+    MU_RUN_TEST(is_full_when_full_board_returns_true);
+    MU_RUN_TEST(is_full_when_empty_board_returns_false);
 
     MU_REPORT();
 }

@@ -96,5 +96,14 @@ int Board_is_column_valid(Board *self, int column)
 
 int Board_is_full(Board *self)
 {
-    return 0;
+    int column;
+    int row = self->rows - 1;
+
+    for (column = 0; column < self->columns; column += 1) {
+        if (self->get(self, column, row) == self->empty_square) {
+            return 0;
+        }
+    }
+
+    return 1;
 }
