@@ -16,7 +16,9 @@
     LineChecker *line_checker; \
     int (*input_move)(self_t *self, Player *player, int column); \
     int (*is_game_over)(Game *self); \
-    Player *(*get_winner)(Game *self);
+    Player *(*get_winner)(Game *self); \
+    int (*is_win)(Game *self); \
+    int (*is_draw)(Game *self);
 
 typedef struct _Game Game;
 
@@ -36,5 +38,7 @@ void Game_destroy(Game *self);
 int Game_input_move(Game *self, Player *player, int column);
 int Game_is_game_over(Game *self);
 Player *Game_get_winner(Game *self);
+int Game_is_win(Game *self);
+int Game_is_draw(Game *self);
 
 #endif

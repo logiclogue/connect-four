@@ -62,6 +62,8 @@ void Game_apply(Game *self)
     self->destroy = Game_destroy;
     self->input_move = Game_input_move;
     self->is_game_over = Game_is_game_over;
+    self->is_win = Game_is_win;
+    self->is_draw = Game_is_draw;
 }
 
 void Game_destroy(Game *self)
@@ -101,7 +103,20 @@ static void switch_player_to_move(Game *self)
 int Game_is_game_over(Game *self)
 {
     int is_win = self->line_checker->is_line(self->line_checker);
-    int is_draw = self->board->is_full(self->board);
+    int is_full = self->board->is_full(self->board);
 
-    return is_win || is_draw;
+    return is_win || is_full;
+}
+
+int Game_is_win(Game *self)
+{
+    return self->line_checker->is_line(self->line_checker);
+}
+
+int Game_is_draw(Game *self)
+{
+    int isnt_line = !self->line_checker->is_line(self->line_checker);
+    int is_full = self->board->is_full(self->board);
+
+    return isnt_line && is_full;
 }
