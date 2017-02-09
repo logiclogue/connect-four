@@ -64,6 +64,7 @@ void Game_apply(Game *self)
     self->is_game_over = Game_is_game_over;
     self->is_win = Game_is_win;
     self->is_draw = Game_is_draw;
+    self->get_winner = Game_get_winner;
 }
 
 void Game_destroy(Game *self)
@@ -119,4 +120,9 @@ int Game_is_draw(Game *self)
     int is_full = self->board->is_full(self->board);
 
     return isnt_line && is_full;
+}
+
+Player *Game_get_winner(Game *self)
+{
+    return NULL;
 }

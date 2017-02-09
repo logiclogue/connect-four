@@ -18,7 +18,8 @@
     int (*is_game_over)(Game *self); \
     Player *(*get_winner)(Game *self); \
     int (*is_win)(Game *self); \
-    int (*is_draw)(Game *self);
+    int (*is_draw)(Game *self); \
+    Player *(*get_winner)(Game *self);
 
 typedef struct _Game Game;
 
