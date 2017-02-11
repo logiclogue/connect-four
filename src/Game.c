@@ -124,5 +124,14 @@ int Game_is_draw(Game *self)
 
 Player *Game_get_winner(Game *self)
 {
+    int is_win = self->is_win(self);
+    int is_player_1 = self->player_to_move == self->player_2;
+
+    if (is_win && is_player_1) {
+        return self->player_1;
+    } else if (is_win) {
+        return self->player_2;
+    }
+
     return NULL;
 }

@@ -247,7 +247,7 @@ MU_TEST(is_draw_when_is_full_returns_true_and_is_line_returns_true_returns_false
 
 static int is_draw_returning_true(Game *game)
 {
-    return 0;
+    return 1;
 }
 
 MU_TEST(get_winner_when_is_draw_returns_true_returns_null)
@@ -257,12 +257,50 @@ MU_TEST(get_winner_when_is_draw_returns_true_returns_null)
     Player *return_value;
 
     game->is_draw = is_draw_returning_true;
+    game->player_to_move = game->player_1;
 
     // act
     return_value = game->get_winner(game);
 
     // assert
     mu_check(return_value == NULL);
+}
+
+static int is_win_returning_true(Game *game)
+{
+    return 1;
+}
+
+MU_TEST(get_winner_is_win_returns_true_doesnt_return_null)
+{
+    // arrange
+    Game *game = Game_new_default();
+    Player *return_value;
+
+    game->is_win = is_win_returning_true;
+    game->player_to_move = player_1;
+
+    // act
+    return_value = game->get_winner(game);
+
+    // assert
+    mu_check(return_value != NULL);
+}
+
+MU_TEST(get_winner_is_win_returns_true_doesnt_return_player_to_move)
+{
+    // arrange
+    Game *game = Game_new_default();
+    Player *return_value;
+
+    game->is_win = is_win_returning_true;
+    game->player_to_move = player_1;
+
+    // act
+    return_value = game->get_winner(game);
+
+    // assert
+    mu_check(return_value != game->player_to_move);
 }
 
 void Game_tests()
@@ -286,6 +324,9 @@ void Game_tests()
     MU_RUN_TEST(is_draw_when_is_line_returns_true_returns_false);
     MU_RUN_TEST(is_draw_when_is_full_returns_true_and_is_line_returns_false_returns_true);
     MU_RUN_TEST(is_draw_when_is_full_returns_true_and_is_line_returns_true_returns_false);
+    MU_RUN_TEST(get_winner_when_is_draw_returns_true_returns_null);
+    MU_RUN_TEST(get_winner_is_win_returns_true_doesnt_return_null);
+    MU_RUN_TEST(get_winner_is_win_returns_true_doesnt_return_player_to_move);
 
     MU_REPORT();
 }
