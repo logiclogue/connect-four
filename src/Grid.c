@@ -23,7 +23,6 @@ void Grid_apply(Grid *self, int columns, int rows)
 {
     self->columns = columns;
     self->rows = rows;
-    self->empty_square = ' ';
 
     allocate_grid(self);
     Grid_apply_default(self);
@@ -46,17 +45,17 @@ void Grid_destroy(Grid *self)
     free(self);
 }
 
-char Grid_get(Grid *self, int column, int row)
+void *Grid_get(Grid *self, int column, int row)
 {
     if (self->is_in_range(self, column, row))
     {
         return self->grid[column][row];
     }
 
-    return self->empty_square;
+    return NULL;
 }
 
-int Grid_set(Grid *self, int column, int row, char piece)
+int Grid_set(Grid *self, int column, int row, void *piece)
 {
     if (!self->is_in_range(self, column, row))
     {
@@ -78,15 +77,15 @@ int Grid_is_in_range(Grid *self, int column, int row)
 
 static void allocate_grid(Grid *self)
 {
-    self->grid = malloc(self->columns * sizeof(char *));
+    self->grid = malloc(self->columns * sizeof(void **));
 
     int column, row;
 
     for (column = 0; column < self->columns; column += 1) {
-        self->grid[column] = malloc(self->rows * sizeof(char));
+        self->grid[column] = malloc(self->rows * sizeof(void *));
 
         for (row = 0; row < self->rows; row += 1) {
-            self->grid[column][row] = self->empty_square;
+            self->grid[column][row] = NULL;
         }
     }
 }
