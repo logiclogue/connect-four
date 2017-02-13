@@ -4,7 +4,7 @@
 #include "Class.h"
 
 #define GRID_PROPS(self_t) \
-    char **grid; \
+    void ***grid; \
     int columns; \
     int rows; \
     void *(*get)(self_t *self, int column, int row); \

@@ -23,7 +23,7 @@ Board *Board_new_default(void);
 void Board_apply(Board *self);
 void Board_destroy(Board *self);
 int Board_input(Board *self, int column, void *piece);
-char Board_remove(Board *self, int column);
+void *Board_remove(Board *self, int column);
 int Board_is_column_valid(Board *self, int column);
 int Board_is_full(Board *self);
 
