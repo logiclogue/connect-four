@@ -5,8 +5,8 @@
 #include "Grid.h"
 
 #define BOARD_PROPS(self_t) \
-    int (*input)(self_t *self, int column, char piece); \
-    char (*remove)(Board *self, int column); \
+    int (*input)(self_t *self, int column, void *piece); \
+    void *(*remove)(Board *self, int column); \
     int (*is_column_valid)(self_t *self, int column); \
     int (*is_full)(self_t *self);
 
@@ -22,7 +22,7 @@ Board *Board_new(int columns, int rows);
 Board *Board_new_default(void);
 void Board_apply(Board *self);
 void Board_destroy(Board *self);
-int Board_input(Board *self, int column, char piece);
+int Board_input(Board *self, int column, void *piece);
 char Board_remove(Board *self, int column);
 int Board_is_column_valid(Board *self, int column);
 int Board_is_full(Board *self);
