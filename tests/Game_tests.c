@@ -147,6 +147,20 @@ MU_TEST(input_move_when_valid_move_increments_move)
     mu_check(game->move == 1);
 }
 
+MU_TEST(input_move_when_valid_move_appends_to_record)
+{
+    // arrange
+    Game *game = Game_new_default();
+    Player *player = game->player_to_move;
+    int column = 1;
+
+    // act
+    game->input_move(game, player, column);
+
+    // assert
+    mu_check(game->record[game->move - 1] == column);
+}
+
 MU_TEST(move_valid_with_player_not_to_move_returns_false)
 {
     // arrange
@@ -413,6 +427,7 @@ void Game_tests()
     MU_RUN_TEST(move_valid_when_is_game_over_returns_false_returns_false);
     MU_RUN_TEST(input_move_when_valid_move_inputs_move);
     MU_RUN_TEST(input_move_when_valid_move_increments_move);
+    MU_RUN_TEST(input_move_when_valid_move_appends_to_record);
 
     MU_REPORT();
 }

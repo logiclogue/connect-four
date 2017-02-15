@@ -95,6 +95,7 @@ int Game_input_move(Game *self, Player *player, int column)
 
     switch_player_to_move(self);
 
+    self->record[self->move] = column;
     self->move += 1;
 
     return 1;
