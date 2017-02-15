@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "../deps/minunit/minunit.h"
 #include "LineChecker_tests.h"
 #include "../src/LineChecker.h"
@@ -72,7 +73,7 @@ MU_TEST(calls_is_line_returns_false_when_none_return_true)
 Grid *get_horizontal_line_grid(void)
 {
     Board *board = Board_new(3, 3);
-    char piece = 'T';
+    void *piece = board;
 
     board->input(board, 0, piece);
     board->input(board, 1, piece);
@@ -84,7 +85,7 @@ Grid *get_horizontal_line_grid(void)
 Grid *get_vertical_line_grid(void)
 {
     Board *board = Board_new(3, 3);
-    char piece = 'T';
+    void *piece = board;
     int column = 1;
 
     board->input(board, column, piece);
@@ -97,8 +98,8 @@ Grid *get_vertical_line_grid(void)
 Grid *get_positive_diagonal_line_grid(void)
 {
     Board *board = Board_new(3, 3);
-    char piece = 'T';
-    char other_piece = 'L';
+    void *piece = board;
+    void *other_piece = malloc(sizeof(void *));
 
     board->input(board, 0, piece);
     board->input(board, 1, other_piece);
@@ -113,8 +114,8 @@ Grid *get_positive_diagonal_line_grid(void)
 Grid *get_negative_diagonal_line_grid(void)
 {
     Board *board = Board_new(3, 3);
-    char piece = 'T';
-    char other_piece = 'L';
+    void *piece = board;
+    void *other_piece = malloc(sizeof(void *));
 
     board->input(board, 0, other_piece);
     board->input(board, 0, other_piece);
