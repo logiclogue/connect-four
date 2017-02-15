@@ -115,6 +115,55 @@ MU_TEST(input_move_when_is_game_over_returns_false_returns_false)
     mu_check(!return_value);
 }
 
+MU_TEST(move_valid_with_player_not_to_move_returns_false)
+{
+    // arrange
+    game->player_to_move = player_1;
+    int column = 0;
+    int return_value;
+
+    game->board->is_column_valid = board_is_column_valid_returning_true;
+
+    // act
+    return_value = game->move_valid(game, player_2, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
+MU_TEST(move_valid_when_is_column_valid_returns_false_returns_false)
+{
+    // arrange
+    game->player_to_move = player_1;
+    int column = 0;
+    int return_value;
+
+    game->board->is_column_valid = board_is_column_valid_returning_false;
+
+    // act
+    return_value = game->move_valid(game, player_1, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
+MU_TEST(move_valid_when_is_game_over_returns_false_returns_false)
+{
+    // arrange
+    game->player_to_move = player_1;
+    int column = 0;
+    int return_value;
+
+    game->is_game_over = game_is_game_over_returning_false;
+    game->board->is_column_valid = board_is_column_valid_returning_false;
+
+    // act
+    return_value = game->move_valid(game, player_1, column);
+
+    // assert
+    mu_check(!return_value);
+}
+
 static int line_checker_is_line_returning_true(LineChecker *self)
 {
     return 1;
@@ -327,6 +376,9 @@ void Game_tests()
     MU_RUN_TEST(get_winner_when_is_draw_returns_true_returns_null);
     MU_RUN_TEST(get_winner_is_win_returns_true_doesnt_return_null);
     MU_RUN_TEST(get_winner_is_win_returns_true_doesnt_return_player_to_move);
+    MU_RUN_TEST(move_valid_with_player_not_to_move_returns_false);
+    MU_RUN_TEST(move_valid_when_is_column_valid_returns_false_returns_false);
+    MU_RUN_TEST(move_valid_when_is_game_over_returns_false_returns_false);
 
     MU_REPORT();
 }
