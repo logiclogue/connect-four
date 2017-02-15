@@ -7,7 +7,7 @@
 #include "LineChecker.h"
 
 #define GAME_PROPS(self_t) \
-    char *record; \
+    int *record; \
     int move; \
     Player *player_1; \
     Player *player_2; \

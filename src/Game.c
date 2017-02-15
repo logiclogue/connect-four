@@ -42,7 +42,7 @@ Game *Game_new(
     board_squares = self->board->rows * self->board->columns;
 
     self->player_to_move = self->player_1;
-    self->record = malloc(board_squares * sizeof(char));
+    self->record = malloc(board_squares * sizeof(int));
     self->move = 0;
 
     Game_apply(self);
@@ -94,6 +94,8 @@ int Game_input_move(Game *self, Player *player, int column)
     board->input(board, column, player);
 
     switch_player_to_move(self);
+
+    self->move += 1;
 
     return 1;
 }
