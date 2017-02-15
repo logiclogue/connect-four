@@ -28,7 +28,7 @@ void Player_destroy(Player *self)
 
 void Player_apply(Player *self)
 {
-    self->new = Player_new;
+    self->new = Player_new_default;
     self->apply = Player_apply;
     self->input_move = Player_input_move;
     self->move_valid = Player_move_valid;
