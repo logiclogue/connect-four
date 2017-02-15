@@ -125,7 +125,7 @@ MU_TEST(calls_input_puts_into_grid)
     mu_check(board->get(board, 1, 0) == piece);
 }
 
-MU_TEST(calls_remove_returns_character_of_piece)
+MU_TEST(calls_remove_returns_pointer_of_piece)
 {
     // arrange
     Board *board = Board_new(4, 4);
@@ -309,7 +309,7 @@ void Board_tests()
     MU_RUN_TEST(calls_remove_when_one_piece_returns_false);
     MU_RUN_TEST(calls_remove_when_get_on_first_row_returns_false_returns_false);
     MU_RUN_TEST(calls_remove_when_empty_column_returns_false);
-    MU_RUN_TEST(calls_remove_returns_character_of_piece);
+    MU_RUN_TEST(calls_remove_returns_pointer_of_piece);
     MU_RUN_TEST(is_full_when_full_board_returns_true);
     MU_RUN_TEST(is_full_when_empty_board_returns_false);
 
