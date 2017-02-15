@@ -4,6 +4,7 @@
 #include "Board_tests.h"
 #include "LineChecker_tests.h"
 #include "Game_tests.h"
+#include "Player_tests.h"
 
 int main(void)
 {
@@ -11,6 +12,7 @@ int main(void)
     Board_tests();
     LineChecker_tests();
     Game_tests();
+    Player_tests();
 
     return 0;
 }

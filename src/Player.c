@@ -36,16 +36,14 @@ void Player_apply(Player *self)
 
 int Player_input_move(Player *self, int column)
 {
-    int move_valid = self->move_valid(self, column);
+    Game *game = self->game;
 
-    if (!move_valid) {
-        return 0;
-    }
-
-    return 1;
+    return game->move_valid(game, self, column);
 }
 
 int Player_move_valid(Player *self, int column)
 {
-    return 0;
+    Game *game = self->game;
+
+    return game->move_valid(game, self, column);
 }
