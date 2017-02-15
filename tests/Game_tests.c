@@ -307,8 +307,8 @@ void Game_tests()
 {
     printf("Game_tests");
 
-    player_1 = Player_new();
-    player_2 = Player_new();
+    player_1 = Player_new_default();
+    player_2 = Player_new_default();
     game = Game_new(player_1, player_2, NULL, NULL);
 
     MU_RUN_TEST(created_with_new_sets_player_properties);
