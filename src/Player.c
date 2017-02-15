@@ -2,14 +2,28 @@
 #include "Class.h"
 #include "Player.h"
 
-Player *Player_new(void)
+Player *Player_new(Game *game)
 {
     Player *self = CLASS_MALLOC(Player);
 
     Class_apply((Class *)self);
     Player_apply(self);
 
+    self->game = game;
+
     return self;
+}
+
+Player *Player_new_default(void)
+{
+    return Player_new(NULL);
+}
+
+void Player_destroy(Player *self)
+{
+    self->game->destroy(self->game);
+
+    free(self);
 }
 
 void Player_apply(Player *self)

@@ -16,13 +16,13 @@ Game *Game_new(
     int board_squares;
 
     if (player_1 == NULL) {
-        self->player_1 = Player_new();
+        self->player_1 = Player_new(self);
     } else {
         self->player_1 = player_1;
     }
 
     if (player_2 == NULL) {
-        self->player_2 = Player_new();
+        self->player_2 = Player_new(self);
     } else {
         self->player_2 = player_2;
     }

@@ -87,7 +87,7 @@ void *Board_remove(Board *self, int column)
 int Board_is_column_valid(Board *self, int column)
 {
     int last_row = self->rows - 1;
-    int current_square = self->get(self, column, last_row);
+    void *current_square = self->get(self, column, last_row);
     int is_column_not_full = current_square == NULL;
     int is_column_in_range = self->is_in_range(self, column, last_row);
 

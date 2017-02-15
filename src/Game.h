@@ -21,6 +21,7 @@
     int (*is_draw)(Game *self);
 
 typedef struct _Game Game;
+typedef struct _Player Player;
 
 struct _Game {
     CLASS_PROPS(Game)
