@@ -115,6 +115,24 @@ MU_TEST(input_move_when_is_game_over_returns_false_returns_false)
     mu_check(!return_value);
 }
 
+MU_TEST(input_move_when_valid_move_inputs_move)
+{
+    // arrange
+    Game *game = Game_new_default();
+    Player *player = game->player_to_move;
+    Player *result_player;
+    Board *board = game->board;
+    int column = 0;
+
+    // act
+    game->input_move(game, player, column);
+
+    // assert
+    result_player = board->get(board, 0, 0);
+
+    mu_check(result_player == player);
+}
+
 MU_TEST(move_valid_with_player_not_to_move_returns_false)
 {
     // arrange
@@ -379,6 +397,7 @@ void Game_tests()
     MU_RUN_TEST(move_valid_with_player_not_to_move_returns_false);
     MU_RUN_TEST(move_valid_when_is_column_valid_returns_false_returns_false);
     MU_RUN_TEST(move_valid_when_is_game_over_returns_false_returns_false);
+    MU_RUN_TEST(input_move_when_valid_move_inputs_move);
 
     MU_REPORT();
 }

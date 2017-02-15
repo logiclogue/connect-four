@@ -41,7 +41,7 @@ Game *Game_new(
 
     board_squares = self->board->rows * self->board->columns;
 
-    self->player_to_move = player_1;
+    self->player_to_move = self->player_1;
     self->record = malloc(board_squares * sizeof(char));
     self->move = 0;
 
@@ -85,10 +85,13 @@ void Game_destroy(Game *self)
 int Game_input_move(Game *self, Player *player, int column)
 {
     int is_move_valid = self->move_valid(self, player, column);
+    Board *board = self->board;
 
     if (!is_move_valid) {
         return 0;
     }
+
+    board->input(board, column, player);
 
     switch_player_to_move(self);
 
