@@ -69,8 +69,13 @@ void Game_apply(Game *self)
 
 void Game_destroy(Game *self)
 {
-    self->player_1->destroy(self->player_1);
-    self->player_2->destroy(self->player_2);
+    if (self->player_1 != NULL) {
+        self->player_1->destroy(self->player_1);
+    }
+
+    if (self->player_2 != NULL) {
+        self->player_2->destroy(self->player_2);
+    }
 
     free(self->record);
     free(self);
