@@ -7,7 +7,7 @@
 #include "LineChecker.h"
 
 #define GAME_PROPS(self_t) \
-    char *record; \
+    int *record; \
     int move; \
     Player *player_1; \
     Player *player_2; \
@@ -15,10 +15,14 @@
     Board *board; \
     LineChecker *line_checker; \
     int (*input_move)(self_t *self, Player *player, int column); \
-    int (*is_game_over)(Game *self); \
-    Player *(*get_winner)(Game *self);
+    int (*move_valid)(self_t *self, Player *player, int column); \
+    int (*is_game_over)(self_t *self); \
+    Player *(*get_winner)(self_t *self); \
+    int (*is_win)(self_t *self); \
+    int (*is_draw)(self_t *self);
 
 typedef struct _Game Game;
+typedef struct _Player Player;
 
 struct _Game {
     CLASS_PROPS(Game)
@@ -34,7 +38,10 @@ Game *Game_new_default(void);
 void Game_apply(Game *self);
 void Game_destroy(Game *self);
 int Game_input_move(Game *self, Player *player, int column);
+int Game_move_valid(Game *self, Player *player, int column);
 int Game_is_game_over(Game *self);
 Player *Game_get_winner(Game *self);
+int Game_is_win(Game *self);
+int Game_is_draw(Game *self);
 
 #endif

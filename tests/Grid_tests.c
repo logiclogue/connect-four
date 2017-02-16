@@ -1,6 +1,9 @@
 #include "../deps/minunit/minunit.h"
 #include "Grid_tests.h"
 #include "../src/Grid.h"
+#include "../src/Player.h"
+
+Player *player;
 
 MU_TEST(calls_new_default_sets_correct_columns)
 {
@@ -28,29 +31,16 @@ MU_TEST(calls_new_default_sets_correct_rows)
     mu_check(grid->rows == rows);
 }
 
-MU_TEST(calls_new_sets_correct_empty_square)
-{
-    // arrange
-    Grid *grid;
-    char empty_square = ' ';
-
-    // act
-    grid = Grid_new(4, 4);
-
-    // assert
-    mu_check(grid->empty_square == empty_square);
-}
-
 MU_TEST(calls_set_sets_grid_correctly)
 {
     // arrange
     Grid *grid = Grid_new(4, 4);
 
     // act
-    grid->set(grid, 0, 0, 'T');
+    grid->set(grid, 0, 0, player);
 
     // assert
-    mu_check(grid->grid[0][0] == 'T');
+    mu_check(grid->grid[0][0] == player);
 }
 
 MU_TEST(calls_set_returns_true_when_in_range)
@@ -60,7 +50,7 @@ MU_TEST(calls_set_returns_true_when_in_range)
     int valid;
 
     // act
-    valid = grid->set(grid, 0, 0, 'T');
+    valid = grid->set(grid, 0, 0, player);
 
     // assert
     mu_check(valid);
@@ -73,7 +63,7 @@ MU_TEST(calls_set_returns_false_when_out_of_range)
     int valid;
 
     // act
-    valid = grid->set(grid, 4, 4, 'T');
+    valid = grid->set(grid, 4, 4, player);
 
     // assert
     mu_check(!valid);
@@ -105,12 +95,12 @@ MU_TEST(calls_is_in_range_returns_false_when_out_of_range)
     mu_check(!valid);
 }
 
-MU_TEST(calls_get_returns_set_char)
+MU_TEST(calls_get_returns_set_null)
 {
     // arrange
     Grid *grid = Grid_new(4, 4);
-    char return_value;
-    char set_value = 'T';
+    void *return_value;
+    void *set_value = (void *)player;
 
     grid->set(grid, 0, 0, set_value);
 
@@ -125,8 +115,8 @@ MU_TEST(calls_get_returns_empty_square_when_out_of_range)
 {
     // arrange
     Grid *grid = Grid_new(4, 4);
-    char return_value;
-    char set_value = 'T';
+    void *return_value;
+    void *set_value = player;
 
     grid->set(grid, 4, 4, set_value);
 
@@ -134,22 +124,23 @@ MU_TEST(calls_get_returns_empty_square_when_out_of_range)
     return_value = grid->get(grid, 4, 4);
 
     // assert
-    mu_check(return_value == grid->empty_square);
+    mu_check(return_value == NULL);
 }
 
 void Grid_tests()
 {
     printf("Grid_tests");
 
+    player = Player_new_default();
+
     MU_RUN_TEST(calls_new_default_sets_correct_columns);
     MU_RUN_TEST(calls_new_default_sets_correct_rows);
-    MU_RUN_TEST(calls_new_sets_correct_empty_square);
     MU_RUN_TEST(calls_set_sets_grid_correctly);
     MU_RUN_TEST(calls_set_returns_true_when_in_range);
     MU_RUN_TEST(calls_set_returns_false_when_out_of_range);
     MU_RUN_TEST(calls_is_in_range_returns_true_when_in_range);
     MU_RUN_TEST(calls_is_in_range_returns_false_when_out_of_range);
-    MU_RUN_TEST(calls_get_returns_set_char);
+    MU_RUN_TEST(calls_get_returns_set_null);
     MU_RUN_TEST(calls_get_returns_empty_square_when_out_of_range);
 
     MU_REPORT();

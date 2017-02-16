@@ -2,7 +2,7 @@
 #include "LineChecker.h"
 #include "Class.h"
 
-static char check_line(LineChecker *self, int delta_column, int delta_row);
+static void *check_line(LineChecker *self, int delta_column, int delta_row);
 static int get_maximum(LineChecker *self, int count, int delta);
 static int get_minimum(LineChecker *self, int delta);
 
@@ -69,7 +69,7 @@ int LineChecker_is_negative_diagonal_line(LineChecker *self)
     return check_line(self, 1, -1) != 0;
 }
 
-static char check_line(LineChecker *self, int delta_column, int delta_row)
+static void *check_line(LineChecker *self, int delta_column, int delta_row)
 {
     int column, row, i,
         is_same_piece, is_empty_square,
@@ -78,7 +78,7 @@ static char check_line(LineChecker *self, int delta_column, int delta_row)
     int max_row = get_maximum(self, self->grid->rows, delta_row);
     int min_column = get_minimum(self, delta_column);
     int min_row = get_minimum(self, delta_row);
-    char start_piece, current_piece;
+    void *start_piece, *current_piece;
 
     for (column = min_column; column <= max_column; column += 1) {
         for (row = min_row; row <= max_row; row += 1) {
@@ -90,7 +90,7 @@ static char check_line(LineChecker *self, int delta_column, int delta_row)
                 current_piece = self->grid->
                     get(self->grid, testing_column, testing_row);
                 is_same_piece = current_piece == start_piece;
-                is_empty_square = current_piece == self->grid->empty_square;
+                is_empty_square = current_piece == NULL;
 
                 if (!is_same_piece || is_empty_square) {
                     break;

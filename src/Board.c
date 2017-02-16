@@ -34,22 +34,22 @@ void Board_destroy(Board *self)
     Grid_destroy((Grid *)self);
 }
 
-int Board_input(Board *self, int column, char piece)
+int Board_input(Board *self, int column, void *piece)
 {
     int is_not_column_valid = !self->is_column_valid(self, column);
-    char *current_column = self->grid[column];
+    void **current_column = self->grid[column];
 
     if (is_not_column_valid) {
         return 0;
     }
 
     int row;
-    char current_square;
+    void *current_square;
 
     for (row = 0; row < self->rows; row += 1) {
         current_square = current_column[row];
 
-        if (current_square == self->empty_square) {
+        if (current_square == NULL) {
             current_column[row] = piece;
 
             break;
@@ -59,10 +59,10 @@ int Board_input(Board *self, int column, char piece)
     return 1;
 }
 
-char Board_remove(Board *self, int column)
+void *Board_remove(Board *self, int column)
 {
-    char current_piece = self->get(self, column, 0);
-    int is_empty_square = current_piece == self->empty_square;
+    void *current_piece = self->get(self, column, 0);
+    int is_empty_square = current_piece == NULL;
     int row;
     int max_row = self->rows - 1;
 
@@ -72,14 +72,14 @@ char Board_remove(Board *self, int column)
 
     for (row = max_row; row >= 0; row -= 1) {
         current_piece = self->get(self, column, row);
-        is_empty_square = current_piece == self->empty_square;
+        is_empty_square = current_piece == NULL;
 
         if (!is_empty_square) {
             break;
         }
     }
 
-    self->set(self, column, row, self->empty_square);
+    self->set(self, column, row, NULL);
 
     return current_piece;
 }
@@ -87,8 +87,8 @@ char Board_remove(Board *self, int column)
 int Board_is_column_valid(Board *self, int column)
 {
     int last_row = self->rows - 1;
-    int current_square = self->get(self, column, last_row);
-    int is_column_not_full = current_square == self->empty_square;
+    void *current_square = self->get(self, column, last_row);
+    int is_column_not_full = current_square == NULL;
     int is_column_in_range = self->is_in_range(self, column, last_row);
 
     return is_column_not_full && is_column_in_range;
@@ -96,5 +96,14 @@ int Board_is_column_valid(Board *self, int column)
 
 int Board_is_full(Board *self)
 {
-    return 0;
+    int column;
+    int row = self->rows - 1;
+
+    for (column = 0; column < self->columns; column += 1) {
+        if (self->get(self, column, row) == NULL) {
+            return 0;
+        }
+    }
+
+    return 1;
 }
