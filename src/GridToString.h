@@ -12,7 +12,8 @@
     char player_1_char; \
     char player_2_char; \
     char empty_char; \
-    char *(*get_string)(self_t *self);
+    char *(*get)(self_t *self); \
+    char *(*get_row)(self_t *self);
 
 typedef struct _GridToString GridToString;
 
@@ -27,6 +28,7 @@ GridToString *GridToString_new(
     Player *player_2_ptr);
 GridToString *GridToString_new_default(void);
 void GridToString_apply(GridToString *self);
-char *GridToString_get_string(GridToString *self);
+char *GridToString_get(GridToString *self);
+char *GridToString_get_row(GridToString *self, int row);
 
 #endif
