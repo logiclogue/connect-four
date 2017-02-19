@@ -5,6 +5,7 @@
 #include "LineChecker_tests.h"
 #include "Game_tests.h"
 #include "Player_tests.h"
+#include "GridToString_tests.h"
 
 int main(void)
 {
@@ -13,7 +14,9 @@ int main(void)
     LineChecker_tests();
     Game_tests();
     Player_tests();
+    GridToString_tests();
 
     return 0;
 }
+
 #endif
