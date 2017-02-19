@@ -10,6 +10,9 @@ GridToString *GridToString_new(
     self->grid = grid;
     self->player_1_ptr = player_1_ptr;
     self->player_2_ptr = player_2_ptr;
+    self->player_1_char = 'X';
+    self->player_2_char = 'O';
+    self->empty_char = ' ';
 
     return self;
 }
