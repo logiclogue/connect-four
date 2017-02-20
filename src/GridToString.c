@@ -15,6 +15,8 @@ GridToString *GridToString_new(
     self->player_2_char = 'O';
     self->empty_char = ' ';
 
+    GridToString_apply(self);
+
     return self;
 }
 
