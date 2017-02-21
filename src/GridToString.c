@@ -47,5 +47,11 @@ char *GridToString_get_row(GridToString *self, int column)
 
 char GridToString_get_char(GridToString *self, void *player_ptr)
 {
+    if (player_ptr == self->player_1_ptr) {
+        return self->player_1_char;
+    } else if (player_ptr == self->player_2_ptr) {
+        return self->player_2_char;
+    }
+
     return self->empty_char;
 }
