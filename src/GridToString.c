@@ -40,9 +40,20 @@ char *GridToString_get(GridToString *self)
     return "";
 }
 
-char *GridToString_get_row(GridToString *self, int column)
+char *GridToString_get_row(GridToString *self, int row)
 {
-    return "";
+    char *output = malloc(sizeof(char) * self->grid->columns);
+    Grid *grid = self->grid;
+    int columns = grid->columns;
+    int x;
+    void *current_ptr;
+
+    for (x = 0; x < columns; x += 1) {
+        current_ptr = grid->get(grid, x, row);
+        output[x] = self->get_char(self, current_ptr);
+    }
+
+    return output;
 }
 
 char GridToString_get_char(GridToString *self, void *player_ptr)

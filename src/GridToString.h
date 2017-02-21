@@ -14,7 +14,7 @@
     char player_2_char; \
     char empty_char; \
     char *(*get)(self_t *self); \
-    char *(*get_row)(self_t *self, int column); \
+    char *(*get_row)(self_t *self, int row); \
     char (*get_char)(self_t *self, void *player_ptr);
 
 typedef struct _GridToString GridToString;
