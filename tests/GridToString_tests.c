@@ -53,6 +53,8 @@ MU_TEST(get_row_called_when_player_1_made_move_player_1_char)
 
     // assert
     mu_check(result[0] == converter->player_1_char);
+
+    free(result)
 }
 
 void GridToString_tests()
