@@ -7,7 +7,10 @@
 int main(void)
 {
     Game *game = Game_new_default();
-    GridToString *converter = GridToString_new((Grid *)game->board, game->player_1, game->player_2);
+    Grid *grid = (Grid *)game->board;
+    Player *player_1 = game->player_1;
+    Player *player_2 = game->player_2;
+    GridToString *converter = GridToString_new(grid, player_1, player_2);
 
     int move;
 
