@@ -14,7 +14,7 @@ GridToString *GridToString_new(
     self->player_2_ptr = player_2_ptr;
     self->player_1_char = 'X';
     self->player_2_char = 'O';
-    self->empty_char = ' ';
+    self->empty_char = '.';
 
     GridToString_apply(self);
 
