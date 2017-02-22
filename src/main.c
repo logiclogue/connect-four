@@ -1,27 +1,29 @@
 #include <stdio.h>
 #include "Game.h"
+#include "GridToString.h"
+#include "Grid.h"
 
 #ifdef BUILD_MAIN
 int main(void)
 {
-    Board *board = Board_new(3, 3);
-    LineChecker *line_checker = LineChecker_new((Grid *)board, 3);
-    Game *game = Game_new(NULL, NULL, board, line_checker);
-    int column;
+    Game *game = Game_new_default();
+    GridToString *converter = GridToString_new((Grid *)game->board, game->player_1, game->player_2);
+
+    int move;
 
     while (!game->is_game_over(game)) {
-        scanf("%d", &column);
+        printf("\n0123456\n");
+        printf(converter->get(converter));
 
-        game->input_move(game, game->player_to_move, column);
+        printf("\nColumn to move: ");
+        scanf("%d", &move);
 
-        int x, y;
-
-        for (x = board->columns - 1; x >= 0; x -= 1) {
-            for (y = 0; y < board->rows; y += 1) {
-                printf("%p", board->get(board, y, x));
-            }
-            printf("\n");
-        }
+        game->input_move(game, game->player_to_move, move);
     }
+
+    printf("0123456\n");
+    printf(converter->get(converter));
+
+    printf("Game over\n");
 }
 #endif
