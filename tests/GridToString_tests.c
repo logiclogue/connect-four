@@ -57,6 +57,24 @@ MU_TEST(get_row_called_when_player_1_made_move_player_1_char)
     free(result);
 }
 
+MU_TEST(get_called_sets_correct_value)
+{
+    // arrange
+    GridToString *converter = GridToString_new(grid, player_1, player_2);
+    int last_row = grid->rows - 1;
+    int column = 1;
+
+    // act
+    grid->set(grid, column, last_row, player_2);
+
+    char *result = converter->get(converter);
+
+    // assert
+    mu_check(result[column] == converter->player_2_char);
+
+    free(result);
+}
+
 void GridToString_tests()
 {
     player_1 = Player_new_default();
@@ -68,6 +86,7 @@ void GridToString_tests()
     MU_RUN_TEST(get_char_called_with_player_returns_player_char);
     MU_RUN_TEST(get_row_called_returns_string_length_of_row);
     MU_RUN_TEST(get_row_called_when_player_1_made_move_player_1_char);
+    MU_RUN_TEST(get_called_sets_correct_value);
 
     MU_REPORT();
 }

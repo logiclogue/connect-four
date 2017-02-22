@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include "GridToString.h"
 
 GridToString *GridToString_new(
@@ -37,7 +38,16 @@ void GridToString_apply(GridToString *self)
 
 char *GridToString_get(GridToString *self)
 {
-    return "";
+    int size = self->grid->rows * (self->grid->columns + 2);
+    char *output = malloc(sizeof(char) * size);
+    int y = self->grid->rows - 1;
+
+    for (; y >= 0; y -= 1) {
+        strcat(output, self->get_row(self, y));
+        strcat(output, "\n");
+    }
+
+    return output;
 }
 
 char *GridToString_get_row(GridToString *self, int row)
