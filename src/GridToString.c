@@ -41,10 +41,15 @@ char *GridToString_get(GridToString *self)
     int size = self->grid->rows * (self->grid->columns + 2);
     char *output = malloc(sizeof(char) * size);
     int y = self->grid->rows - 1;
+    char *current_string;
 
     for (; y >= 0; y -= 1) {
-        strcat(output, self->get_row(self, y));
+        current_string = self->get_row(self, y);
+
+        strcat(output, current_string);
         strcat(output, "\n");
+
+        free(current_string);
     }
 
     return output;
