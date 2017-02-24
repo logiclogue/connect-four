@@ -14,12 +14,12 @@
     Player *player_to_move; \
     Board *board; \
     LineChecker *line_checker; \
-    int (*input_move)(self_t *self, Player *player, int column); \
-    int (*move_valid)(self_t *self, Player *player, int column); \
-    int (*is_game_over)(self_t *self); \
-    Player *(*get_winner)(self_t *self); \
-    int (*is_win)(self_t *self); \
-    int (*is_draw)(self_t *self);
+    int (*input_move)(); \
+    int (*move_valid)(); \
+    int (*is_game_over)(); \
+    Player *(*get_winner)(); \
+    int (*is_win)(); \
+    int (*is_draw)();
 
 typedef struct _Game Game;
 typedef struct _Player Player;
