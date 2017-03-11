@@ -4,7 +4,7 @@
 #include "Grid.h"
 
 #ifdef BUILD_MAIN
-int main(void)
+int main(int argc, char *argv[])
 {
     Game *game = Game_new_default();
     Grid *grid = (Grid *)game->board;
