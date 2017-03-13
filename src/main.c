@@ -36,12 +36,13 @@ int main(int argc, char *argv[])
     int line_length = 4;
     int move, i;
     char *flag, *argument, *column_string;
+    char null_string[] = "";
 
     for (i = 0; i < argc; i += 1) {
         flag = argv[i];
-        argument = NULL;
+        argument = null_string;
         
-        if (argc - 1 > i) {
+        if (i < argc - 1) {
             argument = argv[i + 1];
         }
 
