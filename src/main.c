@@ -7,6 +7,7 @@
 #include "Board.h"
 #include "LineChecker.h"
 #include "CliGame.h"
+#include "HelpText.h"
 #include "GameManagerInterface.h"
 
 #ifdef BUILD_MAIN
@@ -22,6 +23,8 @@ int main(int argc, char *argv[])
     int i;
     char *flag, *argument;
     char null_string[] = "";
+    enum game_types { NORMAL, HELP, NONE };
+    enum game_types game_type = NORMAL;
 
     for (i = 0; i < argc; i += 1) {
         flag = argv[i];
@@ -37,14 +40,20 @@ int main(int argc, char *argv[])
             rows = atoi(argument);
         } else if (!strcmp(flag, "--length")) {
             line_length = atoi(argument);
+        } else if (!strcmp(flag, "--help")) {
+            game_type = HELP;
         }
     }
 
-    board = Board_new(columns, rows);
-    line_checker = LineChecker_new((Grid *)board, line_length);
-    game = Game_new(NULL, NULL, board, line_checker);
-    game_manager = (GameManagerInterface *)CliGame_new(
-        game, (Grid *)board, line_checker);
+    if (game_type == NORMAL) {
+        board = Board_new(columns, rows);
+        line_checker = LineChecker_new((Grid *)board, line_length);
+        game = Game_new(NULL, NULL, board, line_checker);
+        game_manager = (GameManagerInterface *)CliGame_new(
+            game, (Grid *)board, line_checker);
+    } else if (game_type == HELP) {
+        game_manager = (GameManagerInterface *)HelpText_new(argv[0]);
+    }
 
     game_manager->start(game_manager);
 

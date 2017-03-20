@@ -8,18 +8,18 @@
     CLASS_PROPS(self_t) \
     GAME_MANAGER_INTERFACE_PROPS(self_t) \
     char *program_name; \
-    char *help_text;
+    int length;
 
 typedef struct _HelpText HelpText;
 
 struct _HelpText {
     HELP_TEXT_PROPS(HelpText)
-}
+};
 
-CliGame *CliGame_new(char *help_text);
-CliGame *CliGame_new_default(void);
-void CliGame_apply(CliGame *self);
-void CliGame_destroy(CliGame *self);
-void CliGame_start(CliGame *self);
+HelpText *HelpText_new(char *program_name);
+HelpText *HelpText_new_default(void);
+void HelpText_apply(HelpText *self);
+void HelpText_destroy(HelpText *self);
+void HelpText_start(HelpText *self);
 
 #endif
