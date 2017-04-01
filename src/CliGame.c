@@ -72,14 +72,11 @@ void CliGame_start(CliGame *self)
 static char *get_column_string(int columns)
 {
     char *output = malloc(sizeof(char) * columns);
-    char current_char;
 
     int i;
 
     for (i = 0; i < columns; i += 1) {
-        sprintf(&current_char, "%d", i % 10);
-
-        output[i] = current_char;
+        sprintf(&output[i], "%d", i % 10);
     }
 
     return output;
