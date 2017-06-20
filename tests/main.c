@@ -6,6 +6,7 @@
 #include "Game_tests.h"
 #include "Player_tests.h"
 #include "GridToString_tests.h"
+#include "MoveInputter_tests.h"
 
 int main(void)
 {
@@ -15,6 +16,7 @@ int main(void)
     Game_tests();
     Player_tests();
     GridToString_tests();
+    MoveInputter_tests();
 
     return 0;
 }
