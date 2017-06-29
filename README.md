@@ -111,7 +111,7 @@ Column to move:
 
 ## License
 
-Licensed user the GNU GPLv3. See [LICENSE](LICENSE).
+Licensed user the GNU GPLv3
 
 ## Author
 
