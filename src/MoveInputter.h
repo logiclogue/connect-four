@@ -2,6 +2,7 @@
 #define MOVE_INPUTTER_H
 
 #include "Game.h"
+#include "Class.h"
 
 #define MOVE_INPUTTER_PROPS(self_t) \
     Game *game; \

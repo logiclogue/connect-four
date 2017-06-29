@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "MoveInputter.h"
 #include "Game.h"
+#include "Class.h"
 
 MoveInputter *MoveInputter_new(Game *game)
 {
@@ -37,7 +38,7 @@ void MoveInputter_destroy(MoveInputter *self)
 
 int MoveInputter_input_from_notation(MoveInputter *self, char *notation)
 {
-    //self->game->input_move(self->game, self->game->player_1, 0);
+    self->game->input_move(self->game, self->game->player_1, 0);
 
     return 1;
 }

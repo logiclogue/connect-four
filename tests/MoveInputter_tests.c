@@ -24,7 +24,7 @@ MU_TEST(input_from_notation_called_with_empty_string_doesnt_call_input_move)
     game->input_move = input_move_counter_mock;
 
     // act
-    inputter->input_from_notation("");
+    return_value = inputter->input_from_notation(inputter, "");
 
     // assert
     mu_check(called_input_move_counter == 0);
