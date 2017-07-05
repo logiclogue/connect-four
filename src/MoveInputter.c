@@ -1,7 +1,10 @@
 #include <stdlib.h>
+#include <string.h>
 #include "MoveInputter.h"
 #include "Game.h"
 #include "Class.h"
+
+static int convert_char_to_int(char number);
 
 MoveInputter *MoveInputter_new(Game *game)
 {
@@ -38,7 +41,20 @@ void MoveInputter_destroy(MoveInputter *self)
 
 int MoveInputter_input_from_notation(MoveInputter *self, char *notation)
 {
-    self->game->input_move(self->game, self->game->player_1, 0);
+    int length = strlen(notation);
+    int i;
+    int column;
+
+    for (i = 0; i < length; i += 1) {
+        column = convert_char_to_int(notation[i]);
+
+        self->game->input_move(self->game, self->game->player_1, column);
+    }
 
     return 1;
+}
+
+int static convert_char_to_int(char number)
+{
+    return (char)number - 48;
 }
