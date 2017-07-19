@@ -21,16 +21,16 @@ A command line Connect Four engine.
 ## To do
 
 - Create a naughts-and-crosses game
-- Parse board positions as an argument
 - Create a separate program which just validates whether there is a connect four
 - Create an AI bot
 
 ## Arguments
 
 ```
---columns  <number>  Columns on the board (default 7)
---rows     <number>  Rows on the board (default 6)
---length   <number>  Length of line required to win (default 4)
+--columns  <number>   Columns on the board (default 7)
+--rows     <number>   Rows on the board (default 6)
+--length   <number>   Length of line required to win (default 4)
+--moves   <numbers>  Starting position of the board (e.g. 334)
 ```
 
 ## Example
@@ -107,6 +107,26 @@ Output:
 ..........
 
 Column to move: 
+```
+
+### Starting Board Position
+
+Command:
+
+`./build/main --moves 3344251`
+
+Output:
+
+```
+7, 6
+0123456
+.......
+.......
+.......
+.......
+...OO..
+.XXXXO.
+Game over
 ```
 
 ## License
