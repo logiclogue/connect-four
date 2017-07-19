@@ -10,9 +10,10 @@ static const char *help_text[] = {
     (char *)" %s [arguments]",
     (char *)"",
     (char *)"Arguments:",
-    (char *)" --columns  <number>  Columns on the board (default 7)",
-    (char *)" --rows     <number>  Rows on the board (default 6)",
-    (char *)" --length   <number>  Length of line required to win (default 4)",
+    (char *)" --columns   <number>   Columns on the board (default 7)",
+    (char *)" --rows      <number>   Rows on the board (default 6)",
+    (char *)" --length    <number>   Length of line required to win (default 4)",
+    (char *)" --notation  <numbers>  Starting position of the board (e.g. 334)",
 };
 
 HelpText *HelpText_new(char *program_name)
