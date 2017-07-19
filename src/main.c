@@ -9,6 +9,7 @@
 #include "CliGame.h"
 #include "HelpText.h"
 #include "GameManagerInterface.h"
+#include "MoveInputter.h"
 
 #ifdef BUILD_MAIN
 int main(int argc, char *argv[])
@@ -17,12 +18,14 @@ int main(int argc, char *argv[])
     Board *board;
     LineChecker *line_checker;
     GameManagerInterface *game_manager;
+    MoveInputter *move_inputter;
     int columns = 7;
     int rows = 6;
     int line_length = 4;
     int i;
     char *flag, *argument;
     char null_string[] = "";
+    char *moves = "";
     enum game_types { NORMAL, HELP, NONE };
     enum game_types game_type = NORMAL;
 
@@ -40,6 +43,8 @@ int main(int argc, char *argv[])
             rows = atoi(argument);
         } else if (!strcmp(flag, "--length")) {
             line_length = atoi(argument);
+        } else if (!strcmp(flag, "--moves")) {
+            moves = argument;
         } else if (!strcmp(flag, "--help")) {
             game_type = HELP;
         }
@@ -51,6 +56,9 @@ int main(int argc, char *argv[])
         game = Game_new(NULL, NULL, board, line_checker);
         game_manager = (GameManagerInterface *)CliGame_new(
             game, (Grid *)board, line_checker);
+        move_inputter = MoveInputter_new(game);
+
+        move_inputter->input_from_notation(move_inputter, moves);
     } else if (game_type == HELP) {
         game_manager = (GameManagerInterface *)HelpText_new(argv[0]);
     }
