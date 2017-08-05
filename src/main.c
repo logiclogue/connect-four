@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     char *flag, *argument;
     char null_string[] = "";
     char *moves = "";
-    enum game_types { NORMAL, HELP, NONE };
+    enum game_types { NORMAL, HELP, IS_VICTORY, WHO_WON, IS_DRAW, NONE };
     enum game_types game_type = NORMAL;
 
     for (i = 0; i < argc; i += 1) {
