@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
             moves = argument;
         } else if (!strcmp(flag, "--help")) {
             game_type = HELP;
+        } else if (!strcmp(flag, "--is-victory")) {
+            game_type = IS_VICTORY;
         }
     }
 
