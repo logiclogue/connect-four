@@ -14,7 +14,7 @@ struct _Factory {
     FACTORY_PROPS(Factory)
 }
 
-Factory Factory_new();
+Factory Factory_new(void);
 Board *Factory_create_board(Factory self, int columns, int rows);
 LineChecker *Factory_create_line_checker(Factory self, Grid grid, int length);
 
